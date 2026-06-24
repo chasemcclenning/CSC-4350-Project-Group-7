@@ -7,6 +7,12 @@ public class Book {
 	//Var to store titles of books
 	private String title;
 	
+	// Genre of the book
+	private String genre;
+	
+	//Book's unique ISBN
+	private String isbn;
+
 	//Var to store name of book authors
 	private String author;
 
@@ -15,7 +21,7 @@ public class Book {
 
 
 	//Constructor for book objects
-	public Book (int id, String title, String author){
+	public Book (int id, String genre, String isbn, String title, String author){
 
 	//Will store the id parameter as the book's id value
 	this.id= id;
@@ -28,7 +34,14 @@ public class Book {
 
 	//Setting new books as available
 	this.available = true;
+
+	//Storing the book's isbn
+	this.isbn= isbn;
+
+	//Storing the genre of the book
+	this.genre= genre;
 	}
+
 
 	//Method to return the title of a book
 	public String getTitle() {
@@ -44,6 +57,16 @@ public class Book {
 	public int getId() {
     		return id;
 	}
+	
+	// Returns the book's genre
+	public String getGenre() {
+    		return genre;
+	}
+
+	// Returns the book's ISBN
+	public String getIsbn() {
+    		return isbn;
+	}		
 	
 	// Returns whether or not the book is available
 	public boolean isAvailable() {

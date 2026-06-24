@@ -12,5 +12,35 @@ public class Member {
 		this.username= username;
 		this.password= password;
 	}
+	// Returns the member's ID
+	public int getMemberId() {
+	    return memberId;
+	}
+
+	// Returns the member's name
+	public String getName() {
+	    return name;
+	}
+
+	// Returns the member's email
+	public String getEmail() {
+	    return email;
+	}
+
+	// Returns the member's username
+	public String getUsername() {
+	    return username;
+	}
+
+	// Returns the member's password
+	public String getPassword() {
+	    return password;
+	}
+
+	@Override
+	public String toString() {
+    		return "Member ID: " + memberId +", Name: " + name + ", Email: " + email +", Username: " + username;
+	}
 }
+
 
