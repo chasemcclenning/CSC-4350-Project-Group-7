@@ -72,6 +72,26 @@ public class Book {
 	public boolean isAvailable() {
 		return available;
 	}
+	
+	//Allow update to a Book's title
+	public void setTitle(String title) {
+    		this.title = title;
+	}
+
+	//Allow update to Author name
+	public void setAuthor(String author) {
+	    this.author = author;
+	}
+
+	//Allow update to book's genre
+	public void setGenre(String genre) {
+	    this.genre = genre;
+	}
+
+	//Allow update to book's ISBN
+	public void setIsbn(String isbn) {
+	    this.isbn = isbn;
+	}
 
 	//MArks book as borrowed by setting availability to false
 	public void borrowBook() {
@@ -86,7 +106,7 @@ public class Book {
 	@Override
 	public String toString() {
     		String status = available ? "Available" : "Borrowed";
-    		return "ID: " + id +", Title: " + title +", Author: " + author +", Status: " + status;
+    		return "ID: " + id + ", Title: " + title + ", Author: " + author + ", Genre: " + genre + ", ISBN: " + isbn + ", Status: " + status;
 	}
 
 }
