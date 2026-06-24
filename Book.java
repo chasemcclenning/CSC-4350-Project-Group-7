@@ -32,25 +32,38 @@ public class Book {
 
 	//Method to return the title of a book
 	public String getTitle() {
-	
 		return title;
+	}
+
+	// Returns the author's name
+	public String getAuthor() {
+    		return author;
+	}
+
+	// Returns the book's unique ID
+	public int getId() {
+    		return id;
 	}
 	
 	// Returns whether or not the book is available
 	public boolean isAvailable() {
-	
-	return available;
+		return available;
 	}
 
 	//MArks book as borrowed by setting availability to false
 	public void borrowBook() {
-	
-	available = false;
+		available = false;
 	}
 	
 	//Marks book as returned by setting availability to true
-	public void returnBook () {
-	
-	available = true;
+	public void returnBook() {
+		available = true;
 	}
+
+	@Override
+	public String toString() {
+    		String status = available ? "Available" : "Borrowed";
+    		return "ID: " + id +", Title: " + title +", Author: " + author +", Status: " + status;
+	}
+
 }
