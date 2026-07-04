@@ -1,54 +1,66 @@
+import java.util.Date;
+
 public class Checkout {
     private int checkoutId;
-    private Member member;
-    private Book book;
-    private String checkoutDate;
-    private String dueDate;
-    private String returnDate;
+    private int memberID;
+    private int copyID;
+    private Date checkoutDate;
+    private Date dueDate;
+    private Date returnDate;
 
-    public Checkout(int checkoutId, Member member, Book book, String checkoutDate, String dueDate) {
-        this.checkoutId = checkoutId;
-        this.member = member;
-        this.book = book;
+    // constrctor for a new checkout (checkoutID AND returnDate are unknown)
+    public Checkout(int memberID, int copyID, Date checkoutDate, Date dueDate) {
+        this.memberID = memberID;
+        this.copyID = copyID;
         this.checkoutDate = checkoutDate;
         this.dueDate = dueDate;
-        this.returnDate = "Not returned";
+        this.returnDate = null;
+    }
+
+    // full constructor (for read statements)
+    public Checkout(int checkoutId, int memberID, int copyID, Date checkoutDate, Date dueDate, Date returnDate) {
+        this.checkoutId = checkoutId;
+        this.memberID = memberID;
+        this.copyID = copyID;
+        this.checkoutDate = checkoutDate;
+        this.dueDate = dueDate;
+        this.returnDate = returnDate;
     }
 
     public int getCheckoutId() {
         return checkoutId;
     }
 
-    public Member getMember() {
-        return member;
+    public int getMemberId() {
+        return memberID;
     }
 
-    public Book getBook() {
-        return book;
+    public int getCopyId() {
+        return copyID;
     }
 
-    public String getCheckoutDate() {
+    public Date getCheckoutDate() {
         return checkoutDate;
     }
 
-    public String getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public String getReturnDate() {
+    public Date getReturnDate() {
         return returnDate;
     }
-
-    public void returnBook(String returnDate) {
+/* will figure out this logic later
+    public void returnBook(Date returnDate) {
         this.returnDate = returnDate;
         book.returnBook();
     }
-
+*/
     @Override
     public String toString() {
         return "Checkout ID: " + checkoutId +
-               ", Member: " + member.getName() +
-               ", Book: " + book.getTitle() +
+               ", Member ID: " + memberID +
+               ", Copy ID: " + copyID +
                ", Checkout Date: " + checkoutDate +
                ", Due Date: " + dueDate +
                ", Return Date: " + returnDate;
