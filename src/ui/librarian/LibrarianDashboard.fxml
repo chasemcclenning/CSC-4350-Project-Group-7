@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="1440"
+            prefHeight="900"
+            styleClass="root-pane">
+
+    <left>
+        <VBox spacing="22" prefWidth="270" styleClass="sidebar">
+            <VBox spacing="2">
+                <Label text="Library" styleClass="brand-title" />
+                <Label text="Management System" styleClass="brand-title-small" />
+            </VBox>
+
+            <VBox spacing="10" styleClass="nav-list">
+                <Button text="Dashboard" styleClass="nav-active" />
+                <Button text="Books" styleClass="nav-button" />
+                <Button text="Members" styleClass="nav-button" />
+                <Button text="Borrow and Return" styleClass="nav-button" />
+                <Button text="Holds" styleClass="nav-button" />
+                <Button text="Fines" styleClass="nav-button" />
+                <Button text="Audit Log" styleClass="nav-button" />
+                <Button text="Reports" styleClass="nav-button" />
+                <Button text="Settings" styleClass="nav-button" />
+            </VBox>
+
+            <Pane VBox.vgrow="ALWAYS" />
+
+            <Button text="Logout" styleClass="logout-button" />
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="28" styleClass="main-content">
+
+            <HBox alignment="CENTER_LEFT" spacing="18">
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="Librarian Dashboard" styleClass="page-title" wrapText="true" />
+                    <Label text="Library system overview and management tools." styleClass="page-subtitle" wrapText="true" />
+                </VBox>
+
+                <TextField promptText="Search books, members, or records..." prefWidth="380" styleClass="search-box" />
+                <Button text="Alerts" styleClass="circle-button" />
+                <Button text="Admin" styleClass="profile-button" />
+            </HBox>
+
+            <GridPane hgap="18" vgap="18">
+                <VBox styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Books" styleClass="stat-number" wrapText="true" />
+                    <Label text="Inventory count" styleClass="stat-label" wrapText="true" />
+                </VBox>
+
+                <VBox styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Members" styleClass="stat-number" wrapText="true" />
+                    <Label text="Registered users" styleClass="stat-label" wrapText="true" />
+                </VBox>
+
+                <VBox styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                    <Label text="Borrowed" styleClass="stat-number" wrapText="true" />
+                    <Label text="Active checkouts" styleClass="stat-label" wrapText="true" />
+                </VBox>
+
+                <VBox styleClass="stat-card" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                    <Label text="Overdue" styleClass="stat-number" wrapText="true" />
+                    <Label text="Past due books" styleClass="stat-label" wrapText="true" />
+                </VBox>
+            </GridPane>
+
+            <HBox spacing="22">
+                <VBox spacing="16" styleClass="large-panel" HBox.hgrow="ALWAYS">
+                    <Label text="Recent Activities" styleClass="section-title" wrapText="true" />
+                    <Label text="Recent borrow activity" styleClass="activity-text" wrapText="true" />
+                    <Label text="Recent return activity" styleClass="activity-text" wrapText="true" />
+                    <Label text="Recent member activity" styleClass="activity-text" wrapText="true" />
+                    <Label text="Recent fine activity" styleClass="activity-text" wrapText="true" />
+                    <Label text="Recent system activity" styleClass="activity-text" wrapText="true" />
+                </VBox>
+
+                <VBox spacing="16" styleClass="large-panel" prefWidth="360">
+                    <Label text="Overdue Books" styleClass="section-title" wrapText="true" />
+                    <Label text="Overdue book title" styleClass="overdue-text" wrapText="true" />
+                    <Label text="Borrowing member" styleClass="overdue-text" wrapText="true" />
+                    <Label text="Due date" styleClass="overdue-text" wrapText="true" />
+                    <Label text="Overdue status" styleClass="overdue-text" wrapText="true" />
+                </VBox>
+            </HBox>
+
+            <VBox spacing="16">
+                <Label text="Quick Actions" styleClass="section-title" wrapText="true" />
+
+                <GridPane hgap="18" vgap="18">
+                    <Button text="Search Books" styleClass="action-card"
+                            GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+                    <Button text="Borrow Book" styleClass="action-card"
+                            GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Button text="Add Member" styleClass="action-card"
+                            GridPane.columnIndex="2" GridPane.rowIndex="0" />
+
+                    <Button text="Place Hold" styleClass="action-card"
+                            GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+                    <Button text="Collect Fine" styleClass="action-card"
+                            GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <Button text="Generate Report" styleClass="action-card"
+                            GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                </GridPane>
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
