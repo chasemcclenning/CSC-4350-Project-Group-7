@@ -1,0 +1,19 @@
+.login-root { -fx-background-color: #f6f7fb; -fx-font-family: "Inter", "SF Pro Display", "Segoe UI", sans-serif; }
+.login-brand-panel { -fx-background-color: #172033; -fx-padding: 46; }
+.login-brand-mark { -fx-background-color: #f59e0b; -fx-background-radius: 13; -fx-min-width: 46; -fx-min-height: 46; }
+.login-brand-mark-text { -fx-font-size: 25px; -fx-font-weight: 900; -fx-text-fill: white; }
+.login-brand-name { -fx-font-size: 23px; -fx-font-weight: 800; -fx-text-fill: white; }
+.login-brand-caption { -fx-font-size: 8px; -fx-font-weight: 800; -fx-text-fill: #8290a7; }
+.login-message { -fx-font-size: 32px; -fx-font-weight: 800; -fx-text-fill: white; }
+.login-message-detail { -fx-font-size: 13px; -fx-line-spacing: 4; -fx-text-fill: #aab5c7; }
+.login-footer { -fx-font-size: 10px; -fx-text-fill: #77849a; }
+.login-form-panel { -fx-padding: 50; }
+.login-form { -fx-background-color: white; -fx-background-radius: 14; -fx-border-color: #e5e9ef; -fx-border-radius: 14; -fx-padding: 34; }
+.login-title { -fx-font-size: 26px; -fx-font-weight: 800; -fx-text-fill: #172033; }
+.login-subtitle { -fx-font-size: 12px; -fx-text-fill: #7c879b; }
+.login-field-label { -fx-font-size: 10px; -fx-font-weight: 800; -fx-text-fill: #4e5a70; }
+.login-field { -fx-background-color: #f8f9fb; -fx-background-radius: 8; -fx-border-color: #dfe4eb; -fx-border-radius: 8; -fx-padding: 11 13; -fx-font-size: 12px; }
+.login-link { -fx-background-color: transparent; -fx-padding: 2; -fx-font-size: 9px; -fx-font-weight: 700; -fx-text-fill: #b56e08; -fx-cursor: hand; }
+.remember-label, .login-help-text { -fx-font-size: 9px; -fx-text-fill: #748095; }
+.login-button { -fx-background-color: #172033; -fx-background-radius: 8; -fx-padding: 12; -fx-font-size: 12px; -fx-font-weight: 800; -fx-text-fill: white; -fx-cursor: hand; }
+.login-button:hover { -fx-background-color: #28364e; }

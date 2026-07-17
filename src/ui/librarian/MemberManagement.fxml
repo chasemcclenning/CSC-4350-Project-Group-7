@@ -42,7 +42,7 @@
                     <Label text="Alex Owens" styleClass="profile-name" />
                     <Label text="Librarian" styleClass="profile-role" />
                 </VBox>
-                <Button text="↪" styleClass="icon-button-quiet" onAction="#showPlaceholder" />
+                <Button text="↪" styleClass="icon-button-quiet" onAction="#showLogin" />
             </HBox>
         </VBox>
     </left>

@@ -8,7 +8,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("ui/librarian/LibrarianDashboard.fxml")
+                getClass().getResource("ui/Login.fxml")
         );
 
         Scene scene = new Scene(loader.load(), 1440, 900);
@@ -22,7 +22,7 @@ public class App extends Application {
         );
 
         scene.getStylesheets().add(
-                getClass().getResource("css/librarian/librarian-dashboard.css").toExternalForm()
+                getClass().getResource("css/login.css").toExternalForm()
         );
 
         stage.setTitle("Library Management System");

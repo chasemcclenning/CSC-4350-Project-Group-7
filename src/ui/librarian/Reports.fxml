@@ -13,7 +13,7 @@
             <Label text="MANAGEMENT" styleClass="nav-section-label" />
             <VBox spacing="6" styleClass="nav-list"><Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" onAction="#showAuditLog" /><Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-active" onAction="#showReports" /><Button text="⚙   Settings" maxWidth="Infinity" styleClass="nav-button" onAction="#showSettings" /></VBox>
             <Pane VBox.vgrow="ALWAYS" />
-            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-profile"><StackPane styleClass="avatar-small"><Label text="AO" styleClass="avatar-text" /></StackPane><VBox spacing="2" HBox.hgrow="ALWAYS"><Label text="Alex Owens" styleClass="profile-name" /><Label text="Librarian" styleClass="profile-role" /></VBox><Button text="↪" styleClass="icon-button-quiet" onAction="#showPlaceholder" /></HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-profile"><StackPane styleClass="avatar-small"><Label text="AO" styleClass="avatar-text" /></StackPane><VBox spacing="2" HBox.hgrow="ALWAYS"><Label text="Alex Owens" styleClass="profile-name" /><Label text="Librarian" styleClass="profile-role" /></VBox><Button text="↪" styleClass="icon-button-quiet" onAction="#showLogin" /></HBox>
         </VBox>
     </left>
 

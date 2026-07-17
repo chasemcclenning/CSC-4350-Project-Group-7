@@ -27,6 +27,10 @@ public class NavigationController {
         navigate(event, "LibrarianDashboard.fxml", "librarian-dashboard.css");
     }
 
+    public void showLogin(ActionEvent event) throws IOException {
+        navigateFromRoot(event, "/ui/Login.fxml", "/css/login.css");
+    }
+
     public void showBooks(ActionEvent event) throws IOException {
         navigate(event, "BookCatalog.fxml", "book-catalog.css");
     }
@@ -84,8 +88,12 @@ public class NavigationController {
     }
 
     private void navigate(ActionEvent event, String fxmlFile, String pageStylesheet) throws IOException {
+        navigateFromRoot(event, "/ui/librarian/" + fxmlFile, "/css/librarian/" + pageStylesheet);
+    }
+
+    private void navigateFromRoot(ActionEvent event, String fxmlPath, String pageStylesheet) throws IOException {
         FXMLLoader loader = new FXMLLoader(
-                NavigationController.class.getResource("/ui/librarian/" + fxmlFile)
+                NavigationController.class.getResource(fxmlPath)
         );
         Parent page = loader.load();
         Scene scene = ((Node) event.getSource()).getScene();
@@ -94,7 +102,7 @@ public class NavigationController {
         scene.getStylesheets().setAll(
                 stylesheet("/css/shared/base.css"),
                 stylesheet("/css/shared/components.css"),
-                stylesheet("/css/librarian/" + pageStylesheet)
+                stylesheet(pageStylesheet)
         );
     }
 
