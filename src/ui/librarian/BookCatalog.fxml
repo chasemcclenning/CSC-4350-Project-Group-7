@@ -5,6 +5,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ui.librarian.NavigationController"
             prefWidth="1440" prefHeight="900"
             styleClass="root-pane">
 
@@ -16,25 +17,25 @@
                 </StackPane>
                 <VBox spacing="1">
                     <Label text="Libris" styleClass="brand-title" />
-                    <Label text="ADMIN PORTAL" styleClass="brand-caption" />
+                    <Label text="LIBRARIAN PORTAL" styleClass="brand-caption" />
                 </VBox>
             </HBox>
 
             <Label text="WORKSPACE" styleClass="nav-section-label" />
             <VBox spacing="6" styleClass="nav-list">
-                <Button text="⌂   Dashboard" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="▤   Books" maxWidth="Infinity" styleClass="nav-active" />
-                <Button text="♙   Members" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="⇄   Borrow &amp; Return" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="◷   Holds" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="\$   Fines" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="⌂   Dashboard" maxWidth="Infinity" styleClass="nav-button" onAction="#showDashboard" />
+                <Button text="▤   Books" maxWidth="Infinity" styleClass="nav-active" onAction="#showBooks" />
+                <Button text="♙   Members" maxWidth="Infinity" styleClass="nav-button" onAction="#showMembers" />
+                <Button text="⇄   Borrow &amp; Return" maxWidth="Infinity" styleClass="nav-button" onAction="#showBorrowReturn" />
+                <Button text="◷   Holds" maxWidth="Infinity" styleClass="nav-button" onAction="#showHolds" />
+                <Button text="\$   Fines" maxWidth="Infinity" styleClass="nav-button" onAction="#showFines" />
             </VBox>
 
             <Label text="MANAGEMENT" styleClass="nav-section-label" />
             <VBox spacing="6" styleClass="nav-list">
-                <Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="⚙   Settings" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" onAction="#showAuditLog" />
+                <Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-button" onAction="#showReports" />
+                <Button text="⚙   Settings" maxWidth="Infinity" styleClass="nav-button" onAction="#showSettings" />
             </VBox>
 
             <Pane VBox.vgrow="ALWAYS" />
@@ -45,9 +46,9 @@
                 </StackPane>
                 <VBox spacing="2" HBox.hgrow="ALWAYS">
                     <Label text="Alex Owens" styleClass="profile-name" />
-                    <Label text="Head Librarian" styleClass="profile-role" />
+                    <Label text="Librarian" styleClass="profile-role" />
                 </VBox>
-                <Button text="↪" styleClass="icon-button-quiet" />
+                <Button text="↪" styleClass="icon-button-quiet" onAction="#showPlaceholder" />
             </HBox>
         </VBox>
     </left>
@@ -59,14 +60,14 @@
                     <Label text="Books" styleClass="page-title" />
                     <Label text="Search and manage the library catalog." styleClass="page-subtitle" />
                 </VBox>
-                <Button text="+  Add book" styleClass="primary-button" />
+                <Button text="+  Add book" styleClass="primary-button" onAction="#showPlaceholder" />
             </HBox>
 
             <HBox alignment="CENTER_LEFT" spacing="12" styleClass="catalog-toolbar">
                 <TextField promptText="Search by title or author" HBox.hgrow="ALWAYS" styleClass="catalog-search" />
                 <ComboBox promptText="All genres" prefWidth="150" styleClass="filter-control" />
                 <ComboBox promptText="All availability" prefWidth="170" styleClass="filter-control" />
-                <Button text="Clear filters" styleClass="toolbar-button" />
+                <Button text="Clear filters" styleClass="toolbar-button" onAction="#showPlaceholder" />
             </HBox>
 
             <VBox spacing="0" VBox.vgrow="ALWAYS" styleClass="catalog-panel">
@@ -114,8 +115,8 @@
                         <Label text="978-0525559498" styleClass="cell-text" GridPane.columnIndex="3" />
                         <Label text="Available" styleClass="status-available" GridPane.columnIndex="4" />
                         <HBox spacing="6" GridPane.columnIndex="5">
-                            <Button text="Edit" styleClass="row-action" />
-                            <Button text="Delete" styleClass="row-delete" />
+                            <Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" />
+                            <Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" />
                         </HBox>
                     </GridPane>
 
@@ -137,8 +138,8 @@
                         <Label text="978-0593135204" styleClass="cell-text" GridPane.columnIndex="3" />
                         <Label text="Checked out" styleClass="status-unavailable" GridPane.columnIndex="4" />
                         <HBox spacing="6" GridPane.columnIndex="5">
-                            <Button text="Edit" styleClass="row-action" />
-                            <Button text="Delete" styleClass="row-delete" />
+                            <Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" />
+                            <Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" />
                         </HBox>
                     </GridPane>
 
@@ -160,8 +161,8 @@
                         <Label text="978-0735211292" styleClass="cell-text" GridPane.columnIndex="3" />
                         <Label text="Available" styleClass="status-available" GridPane.columnIndex="4" />
                         <HBox spacing="6" GridPane.columnIndex="5">
-                            <Button text="Edit" styleClass="row-action" />
-                            <Button text="Delete" styleClass="row-delete" />
+                            <Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" />
+                            <Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" />
                         </HBox>
                     </GridPane>
 
@@ -183,8 +184,8 @@
                         <Label text="978-0593652886" styleClass="cell-text" GridPane.columnIndex="3" />
                         <Label text="Reserved" styleClass="status-reserved" GridPane.columnIndex="4" />
                         <HBox spacing="6" GridPane.columnIndex="5">
-                            <Button text="Edit" styleClass="row-action" />
-                            <Button text="Delete" styleClass="row-delete" />
+                            <Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" />
+                            <Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" />
                         </HBox>
                     </GridPane>
 
@@ -206,20 +207,20 @@
                         <Label text="978-0593321201" styleClass="cell-text" GridPane.columnIndex="3" />
                         <Label text="Available" styleClass="status-available" GridPane.columnIndex="4" />
                         <HBox spacing="6" GridPane.columnIndex="5">
-                            <Button text="Edit" styleClass="row-action" />
-                            <Button text="Delete" styleClass="row-delete" />
+                            <Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" />
+                            <Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" />
                         </HBox>
                     </GridPane>
                 </VBox>
 
                 <HBox alignment="CENTER_RIGHT" spacing="6" styleClass="pagination">
-                    <Button text="←" styleClass="page-button" />
-                    <Button text="1" styleClass="page-button-active" />
-                    <Button text="2" styleClass="page-button" />
-                    <Button text="3" styleClass="page-button" />
+                    <Button text="←" styleClass="page-button" onAction="#showPlaceholder" />
+                    <Button text="1" styleClass="page-button-active" onAction="#showPlaceholder" />
+                    <Button text="2" styleClass="page-button" onAction="#showPlaceholder" />
+                    <Button text="3" styleClass="page-button" onAction="#showPlaceholder" />
                     <Label text="…" styleClass="page-dots" />
-                    <Button text="2496" styleClass="page-button" />
-                    <Button text="→" styleClass="page-button" />
+                    <Button text="2496" styleClass="page-button" onAction="#showPlaceholder" />
+                    <Button text="→" styleClass="page-button" onAction="#showPlaceholder" />
                 </HBox>
             </VBox>
         </VBox>

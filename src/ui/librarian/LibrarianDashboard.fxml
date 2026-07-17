@@ -6,6 +6,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ui.librarian.NavigationController"
             prefWidth="1440" prefHeight="900"
             styleClass="root-pane">
 
@@ -17,27 +18,27 @@
                 </StackPane>
                 <VBox spacing="1">
                     <Label text="Libris" styleClass="brand-title" />
-                    <Label text="ADMIN PORTAL" styleClass="brand-caption" />
+                    <Label text="LIBRARIAN PORTAL" styleClass="brand-caption" />
                 </VBox>
             </HBox>
 
             <Label text="WORKSPACE" styleClass="nav-section-label" />
             <VBox spacing="6" styleClass="nav-list">
-                <Button text="⌂   Dashboard" maxWidth="Infinity" styleClass="nav-active" />
-                <Button text="▤   Books" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="♙   Members" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="⇄   Borrow &amp; Return" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="◷   Holds" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="\$   Fines" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="⌂   Dashboard" maxWidth="Infinity" styleClass="nav-active" onAction="#showDashboard" />
+                <Button text="▤   Books" maxWidth="Infinity" styleClass="nav-button" onAction="#showBooks" />
+                <Button text="♙   Members" maxWidth="Infinity" styleClass="nav-button" onAction="#showMembers" />
+                <Button text="⇄   Borrow &amp; Return" maxWidth="Infinity" styleClass="nav-button" onAction="#showBorrowReturn" />
+                <Button text="◷   Holds" maxWidth="Infinity" styleClass="nav-button" onAction="#showHolds" />
+                <Button text="\$   Fines" maxWidth="Infinity" styleClass="nav-button" onAction="#showFines" />
             </VBox>
 
             <Label text="MANAGEMENT" styleClass="nav-section-label">
                 <VBox.margin><Insets top="20" /></VBox.margin>
             </Label>
             <VBox spacing="6" styleClass="nav-list">
-                <Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-button" />
-                <Button text="⚙   Settings" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" onAction="#showAuditLog" />
+                <Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-button" onAction="#showReports" />
+                <Button text="⚙   Settings" maxWidth="Infinity" styleClass="nav-button" onAction="#showSettings" />
             </VBox>
 
             <Pane VBox.vgrow="ALWAYS" />
@@ -48,9 +49,9 @@
                 </StackPane>
                 <VBox spacing="2" HBox.hgrow="ALWAYS">
                     <Label text="Alex Owens" styleClass="profile-name" />
-                    <Label text="Head Librarian" styleClass="profile-role" />
+                    <Label text="Librarian" styleClass="profile-role" />
                 </VBox>
-                <Button text="↪" styleClass="icon-button-quiet" />
+                <Button text="↪" styleClass="icon-button-quiet" onAction="#showPlaceholder" />
             </HBox>
         </VBox>
     </left>
@@ -65,8 +66,8 @@
                             <Label text="Here’s what’s happening in your library today." styleClass="page-subtitle" />
                         </VBox>
                         <TextField promptText="Search books or members" prefWidth="290" styleClass="search-box" />
-                        <Button text="●" styleClass="notification-button" />
-                        <Button text="+  New checkout" styleClass="primary-button" />
+                        <Button text="●" styleClass="notification-button" onAction="#showPlaceholder" />
+                        <Button text="+  New checkout" styleClass="primary-button" onAction="#showBorrowReturn" />
                     </HBox>
 
                     <GridPane hgap="16" vgap="16">
@@ -101,7 +102,7 @@
                                     <Label text="Recent activity" styleClass="section-title" />
                                     <Label text="Latest circulation updates" styleClass="section-subtitle" />
                                 </VBox>
-                                <Button text="View all  →" styleClass="text-button" />
+                                <Button text="View all  →" styleClass="text-button" onAction="#showAuditLog" />
                             </HBox>
 
                             <VBox spacing="0">
@@ -171,7 +172,7 @@
                                     <Label text="Nina Patel · Due Jun 24" styleClass="row-meta" />
                                 </VBox>
                             </VBox>
-                            <Button text="Review overdue items" maxWidth="Infinity" styleClass="secondary-button" />
+                            <Button text="Review overdue items" maxWidth="Infinity" styleClass="secondary-button" onAction="#showHolds" />
                         </VBox>
                     </HBox>
 
@@ -184,10 +185,10 @@
                                 <ColumnConstraints percentWidth="25" hgrow="ALWAYS" />
                                 <ColumnConstraints percentWidth="25" hgrow="ALWAYS" />
                             </columnConstraints>
-                            <Button text="＋  Add a book" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="0" />
-                            <Button text="♙  Add member" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="1" />
-                            <Button text="⇄  Process return" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="2" />
-                            <Button text="▥  Generate report" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="3" />
+                            <Button text="＋  Add a book" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="0" onAction="#showPlaceholder" />
+                            <Button text="♙  Add member" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="1" onAction="#showPlaceholder" />
+                            <Button text="⇄  Process return" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="2" onAction="#showBorrowReturn" />
+                            <Button text="▥  Generate report" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="3" onAction="#showReports" />
                         </GridPane>
                     </VBox>
                 </VBox>

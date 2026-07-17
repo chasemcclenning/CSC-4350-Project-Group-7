@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ui.librarian.NavigationController"
+            prefWidth="1440" prefHeight="900"
+            styleClass="root-pane">
+    <left>
+        <VBox prefWidth="248" styleClass="sidebar">
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand-block">
+                <StackPane styleClass="brand-mark"><Label text="L" styleClass="brand-mark-text" /></StackPane>
+                <VBox spacing="1">
+                    <Label text="Libris" styleClass="brand-title" />
+                    <Label text="LIBRARIAN PORTAL" styleClass="brand-caption" />
+                </VBox>
+            </HBox>
+
+            <Label text="WORKSPACE" styleClass="nav-section-label" />
+            <VBox spacing="6" styleClass="nav-list">
+                <Button text="⌂   Dashboard" maxWidth="Infinity" styleClass="nav-button" onAction="#showDashboard" />
+                <Button text="▤   Books" maxWidth="Infinity" styleClass="nav-button" onAction="#showBooks" />
+                <Button text="♙   Members" maxWidth="Infinity" styleClass="nav-active" onAction="#showMembers" />
+                <Button text="⇄   Borrow &amp; Return" maxWidth="Infinity" styleClass="nav-button" onAction="#showBorrowReturn" />
+                <Button text="◷   Holds" maxWidth="Infinity" styleClass="nav-button" onAction="#showHolds" />
+                <Button text="\$   Fines" maxWidth="Infinity" styleClass="nav-button" onAction="#showFines" />
+            </VBox>
+
+            <Label text="MANAGEMENT" styleClass="nav-section-label" />
+            <VBox spacing="6" styleClass="nav-list">
+                <Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" onAction="#showAuditLog" />
+                <Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-button" onAction="#showReports" />
+                <Button text="⚙   Settings" maxWidth="Infinity" styleClass="nav-button" onAction="#showSettings" />
+            </VBox>
+
+            <Pane VBox.vgrow="ALWAYS" />
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-profile">
+                <StackPane styleClass="avatar-small"><Label text="AO" styleClass="avatar-text" /></StackPane>
+                <VBox spacing="2" HBox.hgrow="ALWAYS">
+                    <Label text="Alex Owens" styleClass="profile-name" />
+                    <Label text="Librarian" styleClass="profile-role" />
+                </VBox>
+                <Button text="↪" styleClass="icon-button-quiet" onAction="#showPlaceholder" />
+            </HBox>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22" styleClass="members-content">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Members" styleClass="page-title" />
+                    <Label text="View and manage registered library members." styleClass="page-subtitle" />
+                </VBox>
+                <Button text="+  Add member" styleClass="primary-button" onAction="#showPlaceholder" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="members-toolbar">
+                <TextField promptText="Search by name or email" HBox.hgrow="ALWAYS" styleClass="members-search" />
+                <ComboBox promptText="All accounts" prefWidth="160" styleClass="member-filter" />
+                <Button text="Clear filters" styleClass="toolbar-button" onAction="#showPlaceholder" />
+            </HBox>
+
+            <VBox spacing="0" VBox.vgrow="ALWAYS" styleClass="members-panel">
+                <HBox alignment="CENTER_LEFT" styleClass="members-panel-header">
+                    <VBox spacing="3" HBox.hgrow="ALWAYS">
+                        <Label text="Member directory" styleClass="section-title" />
+                        <Label text="Registered accounts and borrowing eligibility" styleClass="section-subtitle" />
+                    </VBox>
+                    <Label text="Showing 1–5 of 3,842" styleClass="result-count" />
+                </HBox>
+
+                <GridPane styleClass="member-table-header">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="30" />
+                        <ColumnConstraints percentWidth="32" />
+                        <ColumnConstraints percentWidth="15" />
+                        <ColumnConstraints percentWidth="23" />
+                    </columnConstraints>
+                    <Label text="MEMBER" styleClass="column-label" GridPane.columnIndex="0" />
+                    <Label text="EMAIL" styleClass="column-label" GridPane.columnIndex="1" />
+                    <Label text="ACCOUNT" styleClass="column-label" GridPane.columnIndex="2" />
+                    <Label text="ACTIONS" styleClass="column-label" GridPane.columnIndex="3" />
+                </GridPane>
+
+                <VBox spacing="0" VBox.vgrow="ALWAYS">
+                    <GridPane alignment="CENTER_LEFT" styleClass="member-row">
+                        <columnConstraints><ColumnConstraints percentWidth="30" /><ColumnConstraints percentWidth="32" /><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="23" /></columnConstraints>
+                        <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0">
+                            <StackPane styleClass="member-avatar"><Label text="MC" styleClass="member-initials" /></StackPane>
+                            <VBox spacing="3"><Label text="Maya Chen" styleClass="member-name" /><Label text="Member ID: U-10428" styleClass="member-id" /></VBox>
+                        </HBox>
+                        <Label text="maya.chen@example.com" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Active" styleClass="account-active" GridPane.columnIndex="2" />
+                        <HBox spacing="7" GridPane.columnIndex="3"><Button text="View" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" /></HBox>
+                    </GridPane>
+
+                    <GridPane alignment="CENTER_LEFT" styleClass="member-row">
+                        <columnConstraints><ColumnConstraints percentWidth="30" /><ColumnConstraints percentWidth="32" /><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="23" /></columnConstraints>
+                        <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0">
+                            <StackPane styleClass="member-avatar"><Label text="JL" styleClass="member-initials" /></StackPane>
+                            <VBox spacing="3"><Label text="Jordan Lee" styleClass="member-name" /><Label text="Member ID: U-10429" styleClass="member-id" /></VBox>
+                        </HBox>
+                        <Label text="jordan.lee@example.com" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Active" styleClass="account-active" GridPane.columnIndex="2" />
+                        <HBox spacing="7" GridPane.columnIndex="3"><Button text="View" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" /></HBox>
+                    </GridPane>
+
+                    <GridPane alignment="CENTER_LEFT" styleClass="member-row">
+                        <columnConstraints><ColumnConstraints percentWidth="30" /><ColumnConstraints percentWidth="32" /><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="23" /></columnConstraints>
+                        <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0">
+                            <StackPane styleClass="member-avatar"><Label text="SR" styleClass="member-initials" /></StackPane>
+                            <VBox spacing="3"><Label text="Sam Rivera" styleClass="member-name" /><Label text="Member ID: U-10430" styleClass="member-id" /></VBox>
+                        </HBox>
+                        <Label text="sam.rivera@example.com" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Fine due" styleClass="account-warning" GridPane.columnIndex="2" />
+                        <HBox spacing="7" GridPane.columnIndex="3"><Button text="View" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" /></HBox>
+                    </GridPane>
+
+                    <GridPane alignment="CENTER_LEFT" styleClass="member-row">
+                        <columnConstraints><ColumnConstraints percentWidth="30" /><ColumnConstraints percentWidth="32" /><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="23" /></columnConstraints>
+                        <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0">
+                            <StackPane styleClass="member-avatar"><Label text="ET" styleClass="member-initials" /></StackPane>
+                            <VBox spacing="3"><Label text="Elena Torres" styleClass="member-name" /><Label text="Member ID: U-10431" styleClass="member-id" /></VBox>
+                        </HBox>
+                        <Label text="elena.torres@example.com" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Active" styleClass="account-active" GridPane.columnIndex="2" />
+                        <HBox spacing="7" GridPane.columnIndex="3"><Button text="View" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" /></HBox>
+                    </GridPane>
+
+                    <GridPane alignment="CENTER_LEFT" styleClass="member-row, member-row-last">
+                        <columnConstraints><ColumnConstraints percentWidth="30" /><ColumnConstraints percentWidth="32" /><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="23" /></columnConstraints>
+                        <HBox alignment="CENTER_LEFT" spacing="10" GridPane.columnIndex="0">
+                            <StackPane styleClass="member-avatar"><Label text="NP" styleClass="member-initials" /></StackPane>
+                            <VBox spacing="3"><Label text="Nina Patel" styleClass="member-name" /><Label text="Member ID: U-10432" styleClass="member-id" /></VBox>
+                        </HBox>
+                        <Label text="nina.patel@example.com" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Active" styleClass="account-active" GridPane.columnIndex="2" />
+                        <HBox spacing="7" GridPane.columnIndex="3"><Button text="View" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Edit" styleClass="row-action" onAction="#showPlaceholder" /><Button text="Delete" styleClass="row-delete" onAction="#showPlaceholder" /></HBox>
+                    </GridPane>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT" spacing="6" styleClass="pagination">
+                    <Button text="←" styleClass="page-button" onAction="#showPlaceholder" /><Button text="1" styleClass="page-button-active" onAction="#showPlaceholder" /><Button text="2" styleClass="page-button" onAction="#showPlaceholder" /><Button text="3" styleClass="page-button" onAction="#showPlaceholder" /><Label text="…" styleClass="page-dots" /><Button text="769" styleClass="page-button" onAction="#showPlaceholder" /><Button text="→" styleClass="page-button" onAction="#showPlaceholder" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
