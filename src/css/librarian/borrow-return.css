@@ -1,0 +1,34 @@
+.borrow-scroll, .borrow-scroll > .viewport { -fx-background-color: transparent; }
+.borrow-scroll { -fx-padding: 0; -fx-background-insets: 0; }
+.borrow-content { -fx-padding: 30 34 34 34; }
+
+.transaction-card, .loans-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #e5e9ef;
+    -fx-border-radius: 12;
+}
+
+.transaction-card { -fx-padding: 20; }
+.transaction-icon { -fx-alignment: center; -fx-background-radius: 10; -fx-min-width: 38; -fx-min-height: 38; -fx-font-size: 16px; -fx-font-weight: 800; }
+.checkout-icon { -fx-background-color: #eaf2ff; -fx-text-fill: #3975d5; }
+.return-icon { -fx-background-color: #e8f7ef; -fx-text-fill: #23875f; }
+
+.field-label { -fx-font-size: 10px; -fx-font-weight: 800; -fx-text-fill: #596579; }
+.form-field, .loan-search { -fx-background-color: #f8f9fb; -fx-background-radius: 8; -fx-border-color: #e1e5ec; -fx-border-radius: 8; -fx-font-size: 11px; }
+.form-field { -fx-padding: 9 11; }
+.transaction-button { -fx-padding: 11; }
+.return-button { -fx-background-color: #23875f; -fx-background-radius: 9; -fx-padding: 11; -fx-font-size: 12px; -fx-font-weight: 700; -fx-text-fill: white; -fx-cursor: hand; }
+.return-button:hover { -fx-background-color: #2b9970; }
+
+.loans-header { -fx-padding: 18 20; }
+.loan-search { -fx-padding: 9 11; }
+.loan-table-header { -fx-background-color: #f7f8fa; -fx-border-color: #e8ebf0 transparent #e8ebf0 transparent; -fx-padding: 10 18; }
+.column-label { -fx-font-size: 9px; -fx-font-weight: 800; -fx-text-fill: #7f899a; }
+.loan-row { -fx-padding: 14 18; -fx-border-color: transparent transparent #edf0f4 transparent; }
+.loan-row-last { -fx-border-color: transparent; }
+.record-id { -fx-font-size: 10px; -fx-font-weight: 800; -fx-text-fill: #34445c; }
+.cell-text { -fx-font-size: 10px; -fx-text-fill: #586477; }
+.loan-active, .loan-overdue { -fx-background-radius: 10; -fx-padding: 4 7; -fx-font-size: 9px; -fx-font-weight: 700; }
+.loan-active { -fx-background-color: #eaf2ff; -fx-text-fill: #3975d5; }
+.loan-overdue { -fx-background-color: #ffeded; -fx-text-fill: #c94c4c; }

@@ -23,7 +23,7 @@ public class NavigationController {
     }
 
     public void showBorrowReturn(ActionEvent event) throws IOException {
-        showPlaceholder(event);
+        navigate(event, "BorrowReturn.fxml", "borrow-return.css");
     }
 
     public void showHolds(ActionEvent event) throws IOException {
