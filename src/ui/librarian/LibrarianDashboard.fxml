@@ -1,119 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            prefWidth="1440"
-            prefHeight="900"
+            prefWidth="1440" prefHeight="900"
             styleClass="root-pane">
 
     <left>
-        <VBox spacing="22" prefWidth="270" styleClass="sidebar">
-            <VBox spacing="2">
-                <Label text="Library" styleClass="brand-title" />
-                <Label text="Management System" styleClass="brand-title-small" />
+        <VBox prefWidth="248" styleClass="sidebar">
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand-block">
+                <StackPane styleClass="brand-mark">
+                    <Label text="L" styleClass="brand-mark-text" />
+                </StackPane>
+                <VBox spacing="1">
+                    <Label text="Libris" styleClass="brand-title" />
+                    <Label text="ADMIN PORTAL" styleClass="brand-caption" />
+                </VBox>
+            </HBox>
+
+            <Label text="WORKSPACE" styleClass="nav-section-label" />
+            <VBox spacing="6" styleClass="nav-list">
+                <Button text="⌂   Dashboard" maxWidth="Infinity" styleClass="nav-active" />
+                <Button text="▤   Books" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="♙   Members" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="⇄   Borrow &amp; Return" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="◷   Holds" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="\$   Fines" maxWidth="Infinity" styleClass="nav-button" />
             </VBox>
 
-            <VBox spacing="10" styleClass="nav-list">
-                <Button text="Dashboard" styleClass="nav-active" />
-                <Button text="Books" styleClass="nav-button" />
-                <Button text="Members" styleClass="nav-button" />
-                <Button text="Borrow and Return" styleClass="nav-button" />
-                <Button text="Holds" styleClass="nav-button" />
-                <Button text="Fines" styleClass="nav-button" />
-                <Button text="Audit Log" styleClass="nav-button" />
-                <Button text="Reports" styleClass="nav-button" />
-                <Button text="Settings" styleClass="nav-button" />
+            <Label text="MANAGEMENT" styleClass="nav-section-label">
+                <VBox.margin><Insets top="20" /></VBox.margin>
+            </Label>
+            <VBox spacing="6" styleClass="nav-list">
+                <Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="⚙   Settings" maxWidth="Infinity" styleClass="nav-button" />
             </VBox>
 
             <Pane VBox.vgrow="ALWAYS" />
 
-            <Button text="Logout" styleClass="logout-button" />
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-profile">
+                <StackPane styleClass="avatar-small">
+                    <Label text="AO" styleClass="avatar-text" />
+                </StackPane>
+                <VBox spacing="2" HBox.hgrow="ALWAYS">
+                    <Label text="Alex Owens" styleClass="profile-name" />
+                    <Label text="Head Librarian" styleClass="profile-role" />
+                </VBox>
+                <Button text="↪" styleClass="icon-button-quiet" />
+            </HBox>
         </VBox>
     </left>
 
     <center>
-        <VBox spacing="28" styleClass="main-content">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="dashboard-scroll">
+            <content>
+                <VBox spacing="24" styleClass="main-content">
+                    <HBox alignment="CENTER_LEFT" spacing="18" styleClass="topbar">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS">
+                            <Label text="Good morning, Alex" styleClass="page-title" />
+                            <Label text="Here’s what’s happening in your library today." styleClass="page-subtitle" />
+                        </VBox>
+                        <TextField promptText="Search books or members" prefWidth="290" styleClass="search-box" />
+                        <Button text="●" styleClass="notification-button" />
+                        <Button text="+  New checkout" styleClass="primary-button" />
+                    </HBox>
 
-            <HBox alignment="CENTER_LEFT" spacing="18">
-                <VBox spacing="6" HBox.hgrow="ALWAYS">
-                    <Label text="Librarian Dashboard" styleClass="page-title" wrapText="true" />
-                    <Label text="Library system overview and management tools." styleClass="page-subtitle" wrapText="true" />
+                    <GridPane hgap="16" vgap="16">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50" hgrow="ALWAYS" />
+                            <ColumnConstraints percentWidth="50" hgrow="ALWAYS" />
+                        </columnConstraints>
+
+                        <VBox spacing="10" styleClass="stat-card" GridPane.columnIndex="0">
+                            <HBox alignment="CENTER_LEFT">
+                                <Label text="BOOKS" styleClass="stat-eyebrow" HBox.hgrow="ALWAYS" />
+                                <Label text="▤" styleClass="stat-icon, stat-icon-blue" />
+                            </HBox>
+                            <Label text="12,480" styleClass="stat-number" />
+                            <Label text="Total titles in the catalog" styleClass="stat-description" />
+                        </VBox>
+
+                        <VBox spacing="10" styleClass="stat-card" GridPane.columnIndex="1">
+                            <HBox alignment="CENTER_LEFT">
+                                <Label text="ACTIVE CHECKOUTS" styleClass="stat-eyebrow" HBox.hgrow="ALWAYS" />
+                                <Label text="⇄" styleClass="stat-icon, stat-icon-orange" />
+                            </HBox>
+                            <Label text="1,126" styleClass="stat-number" />
+                            <Label text="Books currently borrowed" styleClass="stat-description" />
+                        </VBox>
+                    </GridPane>
+
+                    <HBox spacing="18">
+                        <VBox spacing="18" styleClass="panel" HBox.hgrow="ALWAYS">
+                            <HBox alignment="CENTER_LEFT">
+                                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                    <Label text="Recent activity" styleClass="section-title" />
+                                    <Label text="Latest circulation updates" styleClass="section-subtitle" />
+                                </VBox>
+                                <Button text="View all  →" styleClass="text-button" />
+                            </HBox>
+
+                            <VBox spacing="0">
+                                <HBox alignment="CENTER_LEFT" spacing="14" styleClass="activity-row">
+                                    <Label text="⇄" styleClass="activity-icon, activity-icon-blue" />
+                                    <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                        <Label text="The Midnight Library was checked out" styleClass="row-title" />
+                                        <Label text="Maya Chen · Member #10428" styleClass="row-meta" />
+                                    </VBox>
+                                    <Label text="10 min ago" styleClass="row-time" />
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="14" styleClass="activity-row">
+                                    <Label text="✓" styleClass="activity-icon, activity-icon-green" />
+                                    <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                        <Label text="Project Hail Mary was returned" styleClass="row-title" />
+                                        <Label text="Jordan Lee · Returned on time" styleClass="row-meta" />
+                                    </VBox>
+                                    <Label text="28 min ago" styleClass="row-time" />
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="14" styleClass="activity-row">
+                                    <Label text="+" styleClass="activity-icon, activity-icon-violet" />
+                                    <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                        <Label text="New member account created" styleClass="row-title" />
+                                        <Label text="Sam Rivera · Adult membership" styleClass="row-meta" />
+                                    </VBox>
+                                    <Label text="1 hr ago" styleClass="row-time" />
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="14" styleClass="activity-row, activity-row-last">
+                                    <Label text="\$" styleClass="activity-icon, activity-icon-orange" />
+                                    <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                        <Label text="Overdue fine collected" styleClass="row-title" />
+                                        <Label text="\$8.50 · Receipt #F-2931" styleClass="row-meta" />
+                                    </VBox>
+                                    <Label text="2 hrs ago" styleClass="row-time" />
+                                </HBox>
+                            </VBox>
+                        </VBox>
+
+                        <VBox spacing="18" prefWidth="330" styleClass="panel">
+                            <HBox alignment="CENTER_LEFT">
+                                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                                    <Label text="Overdue items" styleClass="section-title" />
+                                    <Label text="48 items require follow-up" styleClass="section-subtitle" />
+                                </VBox>
+                                <Label text="48" styleClass="alert-badge" />
+                            </HBox>
+                            <VBox spacing="12">
+                                <VBox spacing="5" styleClass="overdue-card">
+                                    <HBox alignment="CENTER_LEFT">
+                                        <Label text="Tomorrow, and Tomorrow..." styleClass="row-title" HBox.hgrow="ALWAYS" />
+                                        <Label text="9d" styleClass="days-badge" />
+                                    </HBox>
+                                    <Label text="Elena Torres · Due Jun 18" styleClass="row-meta" />
+                                </VBox>
+                                <VBox spacing="5" styleClass="overdue-card">
+                                    <HBox alignment="CENTER_LEFT">
+                                        <Label text="Atomic Habits" styleClass="row-title" HBox.hgrow="ALWAYS" />
+                                        <Label text="6d" styleClass="days-badge" />
+                                    </HBox>
+                                    <Label text="Marcus Hill · Due Jun 21" styleClass="row-meta" />
+                                </VBox>
+                                <VBox spacing="5" styleClass="overdue-card">
+                                    <HBox alignment="CENTER_LEFT">
+                                        <Label text="The Creative Act" styleClass="row-title" HBox.hgrow="ALWAYS" />
+                                        <Label text="3d" styleClass="days-badge" />
+                                    </HBox>
+                                    <Label text="Nina Patel · Due Jun 24" styleClass="row-meta" />
+                                </VBox>
+                            </VBox>
+                            <Button text="Review overdue items" maxWidth="Infinity" styleClass="secondary-button" />
+                        </VBox>
+                    </HBox>
+
+                    <VBox spacing="14">
+                        <Label text="Quick actions" styleClass="section-title" />
+                        <GridPane hgap="14" vgap="14">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="25" hgrow="ALWAYS" />
+                                <ColumnConstraints percentWidth="25" hgrow="ALWAYS" />
+                                <ColumnConstraints percentWidth="25" hgrow="ALWAYS" />
+                                <ColumnConstraints percentWidth="25" hgrow="ALWAYS" />
+                            </columnConstraints>
+                            <Button text="＋  Add a book" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="0" />
+                            <Button text="♙  Add member" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="1" />
+                            <Button text="⇄  Process return" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="2" />
+                            <Button text="▥  Generate report" maxWidth="Infinity" styleClass="action-card" GridPane.columnIndex="3" />
+                        </GridPane>
+                    </VBox>
                 </VBox>
-
-                <TextField promptText="Search books, members, or records..." prefWidth="380" styleClass="search-box" />
-                <Button text="Alerts" styleClass="circle-button" />
-                <Button text="Admin" styleClass="profile-button" />
-            </HBox>
-
-            <GridPane hgap="18" vgap="18">
-                <VBox styleClass="stat-card" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                    <Label text="Books" styleClass="stat-number" wrapText="true" />
-                    <Label text="Inventory count" styleClass="stat-label" wrapText="true" />
-                </VBox>
-
-                <VBox styleClass="stat-card" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                    <Label text="Members" styleClass="stat-number" wrapText="true" />
-                    <Label text="Registered users" styleClass="stat-label" wrapText="true" />
-                </VBox>
-
-                <VBox styleClass="stat-card" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                    <Label text="Borrowed" styleClass="stat-number" wrapText="true" />
-                    <Label text="Active checkouts" styleClass="stat-label" wrapText="true" />
-                </VBox>
-
-                <VBox styleClass="stat-card" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                    <Label text="Overdue" styleClass="stat-number" wrapText="true" />
-                    <Label text="Past due books" styleClass="stat-label" wrapText="true" />
-                </VBox>
-            </GridPane>
-
-            <HBox spacing="22">
-                <VBox spacing="16" styleClass="large-panel" HBox.hgrow="ALWAYS">
-                    <Label text="Recent Activities" styleClass="section-title" wrapText="true" />
-                    <Label text="Recent borrow activity" styleClass="activity-text" wrapText="true" />
-                    <Label text="Recent return activity" styleClass="activity-text" wrapText="true" />
-                    <Label text="Recent member activity" styleClass="activity-text" wrapText="true" />
-                    <Label text="Recent fine activity" styleClass="activity-text" wrapText="true" />
-                    <Label text="Recent system activity" styleClass="activity-text" wrapText="true" />
-                </VBox>
-
-                <VBox spacing="16" styleClass="large-panel" prefWidth="360">
-                    <Label text="Overdue Books" styleClass="section-title" wrapText="true" />
-                    <Label text="Overdue book title" styleClass="overdue-text" wrapText="true" />
-                    <Label text="Borrowing member" styleClass="overdue-text" wrapText="true" />
-                    <Label text="Due date" styleClass="overdue-text" wrapText="true" />
-                    <Label text="Overdue status" styleClass="overdue-text" wrapText="true" />
-                </VBox>
-            </HBox>
-
-            <VBox spacing="16">
-                <Label text="Quick Actions" styleClass="section-title" wrapText="true" />
-
-                <GridPane hgap="18" vgap="18">
-                    <Button text="Search Books" styleClass="action-card"
-                            GridPane.columnIndex="0" GridPane.rowIndex="0" />
-
-                    <Button text="Borrow Book" styleClass="action-card"
-                            GridPane.columnIndex="1" GridPane.rowIndex="0" />
-
-                    <Button text="Add Member" styleClass="action-card"
-                            GridPane.columnIndex="2" GridPane.rowIndex="0" />
-
-                    <Button text="Place Hold" styleClass="action-card"
-                            GridPane.columnIndex="0" GridPane.rowIndex="1" />
-
-                    <Button text="Collect Fine" styleClass="action-card"
-                            GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                    <Button text="Generate Report" styleClass="action-card"
-                            GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                </GridPane>
-            </VBox>
-
-        </VBox>
+            </content>
+        </ScrollPane>
     </center>
-
 </BorderPane>

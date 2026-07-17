@@ -1,305 +1,150 @@
-/* ===========================
-   Root
-=========================== */
-
-.root-pane {
-    -fx-background-color: linear-gradient(to bottom right, #f9f9f9, #f2f2f2);
-}
-
-/* ===========================
-   Sidebar
-=========================== */
-
-.sidebar {
-    -fx-background-color: rgba(255,255,255,0.82);
-    -fx-background-radius: 30;
-    -fx-padding: 35;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,.10), 25, 0.2, 0, 6);
-}
-
-.brand-title {
-    -fx-font-size: 30px;
-    -fx-font-weight: 800;
-    -fx-text-fill: #111111;
-}
-
-.brand-title-small {
-    -fx-font-size: 18px;
-    -fx-font-weight: 700;
-    -fx-text-fill: #111111;
-}
-
-.nav-list {
-    -fx-padding: 20 0 0 0;
-}
-
-.nav-button,
-.nav-active {
-
-    -fx-background-radius: 18;
-    -fx-font-size: 16px;
-
-    -fx-font-weight: 600;
-
-    -fx-alignment: CENTER_LEFT;
-
-    -fx-padding: 16 30;
-
-    -fx-pref-width: 210;
-
-    -fx-cursor: hand;
-}
-
-.nav-button {
-
+.dashboard-scroll,
+.dashboard-scroll > .viewport {
     -fx-background-color: transparent;
-
-    -fx-text-fill: #2f2f2f;
 }
 
-.nav-button:hover {
-
-    -fx-background-color: rgba(255,140,0,.10);
+.dashboard-scroll {
+    -fx-padding: 0;
+    -fx-background-insets: 0;
 }
-
-.nav-active {
-
-    -fx-background-color: #FFE8D2;
-
-    -fx-border-color: #FF8C00;
-
-    -fx-border-radius: 18;
-
-    -fx-text-fill: #FF7A00;
-}
-
-.logout-button {
-
-    -fx-background-color: #111111;
-
-    -fx-text-fill: white;
-
-    -fx-background-radius: 18;
-
-    -fx-font-size: 15px;
-
-    -fx-font-weight: bold;
-
-    -fx-pref-width: 200;
-
-    -fx-pref-height: 48;
-
-    -fx-cursor: hand;
-}
-
-.logout-button:hover {
-
-    -fx-background-color: #2c2c2c;
-}
-
-/* ===========================
-   Main Content
-=========================== */
 
 .main-content {
-
-    -fx-padding: 40;
+    -fx-padding: 30 34 34 34;
 }
 
-.page-title {
-
-    -fx-font-size: 42px;
-
-    -fx-font-weight: 800;
-
-    -fx-text-fill: #111111;
-
-    -fx-wrap-text: true;
+.topbar {
+    -fx-padding: 0 0 4 0;
 }
 
-.page-subtitle {
-
-    -fx-font-size: 18px;
-
-    -fx-text-fill: #6B7280;
-
-    -fx-wrap-text: true;
-}
-
-/* ===========================
-   Search Bar
-=========================== */
-
-.search-box {
-
+.stat-card,
+.panel {
     -fx-background-color: white;
-
-    -fx-background-radius: 30;
-
-    -fx-border-radius: 30;
-
-    -fx-padding: 12 22;
-
-    -fx-font-size: 16px;
-
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,.08), 15, .2, 0, 4);
+    -fx-background-radius: 12;
+    -fx-border-color: #e8ebf1;
+    -fx-border-radius: 12;
 }
-
-/* ===========================
-   Top Buttons
-=========================== */
-
-.circle-button {
-
-    -fx-background-color: transparent;
-
-    -fx-border-color: #FF8C00;
-
-    -fx-border-radius: 50;
-
-    -fx-background-radius: 50;
-
-    -fx-pref-width: 55;
-
-    -fx-pref-height: 55;
-
-    -fx-font-weight: bold;
-
-    -fx-cursor: hand;
-}
-
-.profile-button {
-
-    -fx-background-color: #111111;
-
-    -fx-text-fill: white;
-
-    -fx-background-radius: 50;
-
-    -fx-pref-width: 70;
-
-    -fx-pref-height: 55;
-
-    -fx-font-weight: bold;
-
-    -fx-cursor: hand;
-}
-
-/* ===========================
-   Statistic Cards
-=========================== */
 
 .stat-card {
+    -fx-padding: 18;
+    -fx-min-height: 132;
+}
 
-    -fx-background-color: rgba(255,255,255,.82);
-
-    -fx-background-radius: 30;
-
-    -fx-padding: 25;
-
-    -fx-spacing: 10;
-
-    -fx-alignment: CENTER_LEFT;
-
-    -fx-pref-width: 250;
-
-    -fx-min-width: 180;
-
-    -fx-max-width: Infinity;
-
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,.08), 18, .2, 0, 4);
+.stat-eyebrow {
+    -fx-font-size: 10px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #8691a4;
 }
 
 .stat-number {
+    -fx-font-size: 27px;
+    -fx-font-weight: 900;
+    -fx-text-fill: #172033;
+}
 
-    -fx-font-size: 28px;
-
+.stat-icon {
+    -fx-alignment: center;
+    -fx-background-radius: 9;
+    -fx-min-width: 32;
+    -fx-min-height: 32;
+    -fx-font-size: 14px;
     -fx-font-weight: 800;
-
-    -fx-text-fill: #111111;
-
-    -fx-wrap-text: true;
 }
 
-.stat-label {
+.stat-icon-blue { -fx-background-color: #eaf2ff; -fx-text-fill: #3975d5; }
+.stat-icon-orange { -fx-background-color: #fff3df; -fx-text-fill: #c97809; }
 
-    -fx-font-size: 15px;
-
-    -fx-text-fill: #666666;
-
-    -fx-wrap-text: true;
+.stat-description {
+    -fx-font-size: 10px;
+    -fx-text-fill: #7c879b;
 }
 
-/* ===========================
-   Panels
-=========================== */
-
-.large-panel {
-
-    -fx-background-color: rgba(255,255,255,.82);
-
-    -fx-background-radius: 30;
-
-    -fx-padding: 28;
-
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,.08), 18, .2, 0, 4);
+.panel {
+    -fx-padding: 20;
 }
 
-.section-title {
+.activity-row {
+    -fx-padding: 13 0;
+    -fx-border-color: transparent transparent #edf0f4 transparent;
+}
 
-    -fx-font-size: 28px;
+.activity-row-last {
+    -fx-border-color: transparent;
+}
 
+.activity-icon {
+    -fx-alignment: center;
+    -fx-background-radius: 18;
+    -fx-min-width: 36;
+    -fx-min-height: 36;
+    -fx-font-size: 14px;
+    -fx-font-weight: 800;
+}
+
+.activity-icon-blue { -fx-background-color: #eaf2ff; -fx-text-fill: #3975d5; }
+.activity-icon-green { -fx-background-color: #e8f8f1; -fx-text-fill: #26966a; }
+.activity-icon-violet { -fx-background-color: #f1edff; -fx-text-fill: #7454cf; }
+.activity-icon-orange { -fx-background-color: #fff3df; -fx-text-fill: #c97809; }
+
+.row-title {
+    -fx-font-size: 12px;
     -fx-font-weight: 700;
-
-    -fx-text-fill: #111111;
+    -fx-text-fill: #253047;
 }
 
-.activity-text {
-
-    -fx-font-size: 15px;
-
-    -fx-text-fill: #444444;
-
-    -fx-wrap-text: true;
+.row-meta,
+.row-time {
+    -fx-font-size: 10px;
+    -fx-text-fill: #8b95a7;
 }
 
-.overdue-text {
-
-    -fx-font-size: 15px;
-
-    -fx-text-fill: #E65C00;
-
-    -fx-wrap-text: true;
+.row-time {
+    -fx-padding: 0 0 0 14;
 }
 
-/* ===========================
-   Quick Action Cards
-=========================== */
+.alert-badge,
+.days-badge {
+    -fx-alignment: center;
+    -fx-background-color: #ffeded;
+    -fx-background-radius: 12;
+    -fx-font-weight: 800;
+    -fx-text-fill: #cf4c4c;
+}
+
+.alert-badge {
+    -fx-min-width: 30;
+    -fx-min-height: 24;
+    -fx-font-size: 11px;
+}
+
+.days-badge {
+    -fx-min-width: 28;
+    -fx-padding: 4 7;
+    -fx-font-size: 9px;
+}
+
+.overdue-card {
+    -fx-background-color: #fafbfc;
+    -fx-background-radius: 8;
+    -fx-border-color: #eceff3;
+    -fx-border-radius: 8;
+    -fx-padding: 12;
+}
 
 .action-card {
-
-    -fx-background-color: rgba(255,255,255,.85);
-
-    -fx-background-radius: 25;
-
-    -fx-font-size: 16px;
-
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: #e5e9ef;
+    -fx-border-radius: 10;
+    -fx-padding: 16;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 12px;
     -fx-font-weight: 700;
-
-    -fx-pref-width: 220;
-
-    -fx-pref-height: 80;
-
+    -fx-text-fill: #344057;
     -fx-cursor: hand;
-
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,.06), 12, .2, 0, 3);
 }
 
 .action-card:hover {
-
-    -fx-background-color: #FFE8D2;
-
-    -fx-border-color: #FF8C00;
-
-    -fx-border-radius: 25;
+    -fx-background-color: #fff9ec;
+    -fx-border-color: #efbf62;
+    -fx-text-fill: #a86305;
 }
