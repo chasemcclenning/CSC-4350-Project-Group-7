@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="1440" prefHeight="900"
+            styleClass="root-pane">
+
+    <left>
+        <VBox prefWidth="248" styleClass="sidebar">
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand-block">
+                <StackPane styleClass="brand-mark">
+                    <Label text="L" styleClass="brand-mark-text" />
+                </StackPane>
+                <VBox spacing="1">
+                    <Label text="Libris" styleClass="brand-title" />
+                    <Label text="ADMIN PORTAL" styleClass="brand-caption" />
+                </VBox>
+            </HBox>
+
+            <Label text="WORKSPACE" styleClass="nav-section-label" />
+            <VBox spacing="6" styleClass="nav-list">
+                <Button text="⌂   Dashboard" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="▤   Books" maxWidth="Infinity" styleClass="nav-active" />
+                <Button text="♙   Members" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="⇄   Borrow &amp; Return" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="◷   Holds" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="\$   Fines" maxWidth="Infinity" styleClass="nav-button" />
+            </VBox>
+
+            <Label text="MANAGEMENT" styleClass="nav-section-label" />
+            <VBox spacing="6" styleClass="nav-list">
+                <Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-button" />
+                <Button text="⚙   Settings" maxWidth="Infinity" styleClass="nav-button" />
+            </VBox>
+
+            <Pane VBox.vgrow="ALWAYS" />
+
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-profile">
+                <StackPane styleClass="avatar-small">
+                    <Label text="AO" styleClass="avatar-text" />
+                </StackPane>
+                <VBox spacing="2" HBox.hgrow="ALWAYS">
+                    <Label text="Alex Owens" styleClass="profile-name" />
+                    <Label text="Head Librarian" styleClass="profile-role" />
+                </VBox>
+                <Button text="↪" styleClass="icon-button-quiet" />
+            </HBox>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="22" styleClass="catalog-content">
+            <HBox alignment="CENTER_LEFT" spacing="16">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Books" styleClass="page-title" />
+                    <Label text="Search and manage the library catalog." styleClass="page-subtitle" />
+                </VBox>
+                <Button text="+  Add book" styleClass="primary-button" />
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="12" styleClass="catalog-toolbar">
+                <TextField promptText="Search by title or author" HBox.hgrow="ALWAYS" styleClass="catalog-search" />
+                <ComboBox promptText="All genres" prefWidth="150" styleClass="filter-control" />
+                <ComboBox promptText="All availability" prefWidth="170" styleClass="filter-control" />
+                <Button text="Clear filters" styleClass="toolbar-button" />
+            </HBox>
+
+            <VBox spacing="0" VBox.vgrow="ALWAYS" styleClass="catalog-panel">
+                <HBox alignment="CENTER_LEFT" styleClass="catalog-panel-header">
+                    <VBox spacing="3" HBox.hgrow="ALWAYS">
+                        <Label text="Book inventory" styleClass="section-title" />
+                        <Label text="12,480 titles in the catalog" styleClass="section-subtitle" />
+                    </VBox>
+                    <Label text="Showing 1–5 of 12,480" styleClass="result-count" />
+                </HBox>
+
+                <GridPane styleClass="book-table-header">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="28" />
+                        <ColumnConstraints percentWidth="18" />
+                        <ColumnConstraints percentWidth="12" />
+                        <ColumnConstraints percentWidth="17" />
+                        <ColumnConstraints percentWidth="10" />
+                        <ColumnConstraints percentWidth="15" />
+                    </columnConstraints>
+                    <Label text="TITLE" styleClass="column-label" GridPane.columnIndex="0" />
+                    <Label text="AUTHOR" styleClass="column-label" GridPane.columnIndex="1" />
+                    <Label text="GENRE" styleClass="column-label" GridPane.columnIndex="2" />
+                    <Label text="ISBN" styleClass="column-label" GridPane.columnIndex="3" />
+                    <Label text="STATUS" styleClass="column-label" GridPane.columnIndex="4" />
+                    <Label text="ACTIONS" styleClass="column-label" GridPane.columnIndex="5" />
+                </GridPane>
+
+                <VBox spacing="0" VBox.vgrow="ALWAYS">
+                    <GridPane alignment="CENTER_LEFT" styleClass="book-row">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="28" />
+                            <ColumnConstraints percentWidth="18" />
+                            <ColumnConstraints percentWidth="12" />
+                            <ColumnConstraints percentWidth="17" />
+                            <ColumnConstraints percentWidth="10" />
+                            <ColumnConstraints percentWidth="15" />
+                        </columnConstraints>
+                        <VBox spacing="3" GridPane.columnIndex="0">
+                            <Label text="The Midnight Library" styleClass="book-title" />
+                            <Label text="Title ID: T-1042" styleClass="book-id" />
+                        </VBox>
+                        <Label text="Matt Haig" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Fiction" styleClass="cell-text" GridPane.columnIndex="2" />
+                        <Label text="978-0525559498" styleClass="cell-text" GridPane.columnIndex="3" />
+                        <Label text="Available" styleClass="status-available" GridPane.columnIndex="4" />
+                        <HBox spacing="6" GridPane.columnIndex="5">
+                            <Button text="Edit" styleClass="row-action" />
+                            <Button text="Delete" styleClass="row-delete" />
+                        </HBox>
+                    </GridPane>
+
+                    <GridPane alignment="CENTER_LEFT" styleClass="book-row">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="28" />
+                            <ColumnConstraints percentWidth="18" />
+                            <ColumnConstraints percentWidth="12" />
+                            <ColumnConstraints percentWidth="17" />
+                            <ColumnConstraints percentWidth="10" />
+                            <ColumnConstraints percentWidth="15" />
+                        </columnConstraints>
+                        <VBox spacing="3" GridPane.columnIndex="0">
+                            <Label text="Project Hail Mary" styleClass="book-title" />
+                            <Label text="Title ID: T-1043" styleClass="book-id" />
+                        </VBox>
+                        <Label text="Andy Weir" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Sci-Fi" styleClass="cell-text" GridPane.columnIndex="2" />
+                        <Label text="978-0593135204" styleClass="cell-text" GridPane.columnIndex="3" />
+                        <Label text="Checked out" styleClass="status-unavailable" GridPane.columnIndex="4" />
+                        <HBox spacing="6" GridPane.columnIndex="5">
+                            <Button text="Edit" styleClass="row-action" />
+                            <Button text="Delete" styleClass="row-delete" />
+                        </HBox>
+                    </GridPane>
+
+                    <GridPane alignment="CENTER_LEFT" styleClass="book-row">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="28" />
+                            <ColumnConstraints percentWidth="18" />
+                            <ColumnConstraints percentWidth="12" />
+                            <ColumnConstraints percentWidth="17" />
+                            <ColumnConstraints percentWidth="10" />
+                            <ColumnConstraints percentWidth="15" />
+                        </columnConstraints>
+                        <VBox spacing="3" GridPane.columnIndex="0">
+                            <Label text="Atomic Habits" styleClass="book-title" />
+                            <Label text="Title ID: T-1044" styleClass="book-id" />
+                        </VBox>
+                        <Label text="James Clear" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Self-help" styleClass="cell-text" GridPane.columnIndex="2" />
+                        <Label text="978-0735211292" styleClass="cell-text" GridPane.columnIndex="3" />
+                        <Label text="Available" styleClass="status-available" GridPane.columnIndex="4" />
+                        <HBox spacing="6" GridPane.columnIndex="5">
+                            <Button text="Edit" styleClass="row-action" />
+                            <Button text="Delete" styleClass="row-delete" />
+                        </HBox>
+                    </GridPane>
+
+                    <GridPane alignment="CENTER_LEFT" styleClass="book-row">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="28" />
+                            <ColumnConstraints percentWidth="18" />
+                            <ColumnConstraints percentWidth="12" />
+                            <ColumnConstraints percentWidth="17" />
+                            <ColumnConstraints percentWidth="10" />
+                            <ColumnConstraints percentWidth="15" />
+                        </columnConstraints>
+                        <VBox spacing="3" GridPane.columnIndex="0">
+                            <Label text="The Creative Act" styleClass="book-title" />
+                            <Label text="Title ID: T-1045" styleClass="book-id" />
+                        </VBox>
+                        <Label text="Rick Rubin" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Arts" styleClass="cell-text" GridPane.columnIndex="2" />
+                        <Label text="978-0593652886" styleClass="cell-text" GridPane.columnIndex="3" />
+                        <Label text="Reserved" styleClass="status-reserved" GridPane.columnIndex="4" />
+                        <HBox spacing="6" GridPane.columnIndex="5">
+                            <Button text="Edit" styleClass="row-action" />
+                            <Button text="Delete" styleClass="row-delete" />
+                        </HBox>
+                    </GridPane>
+
+                    <GridPane alignment="CENTER_LEFT" styleClass="book-row, book-row-last">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="28" />
+                            <ColumnConstraints percentWidth="18" />
+                            <ColumnConstraints percentWidth="12" />
+                            <ColumnConstraints percentWidth="17" />
+                            <ColumnConstraints percentWidth="10" />
+                            <ColumnConstraints percentWidth="15" />
+                        </columnConstraints>
+                        <VBox spacing="3" GridPane.columnIndex="0">
+                            <Label text="Tomorrow, and Tomorrow, and Tomorrow" styleClass="book-title" />
+                            <Label text="Title ID: T-1046" styleClass="book-id" />
+                        </VBox>
+                        <Label text="Gabrielle Zevin" styleClass="cell-text" GridPane.columnIndex="1" />
+                        <Label text="Fiction" styleClass="cell-text" GridPane.columnIndex="2" />
+                        <Label text="978-0593321201" styleClass="cell-text" GridPane.columnIndex="3" />
+                        <Label text="Available" styleClass="status-available" GridPane.columnIndex="4" />
+                        <HBox spacing="6" GridPane.columnIndex="5">
+                            <Button text="Edit" styleClass="row-action" />
+                            <Button text="Delete" styleClass="row-delete" />
+                        </HBox>
+                    </GridPane>
+                </VBox>
+
+                <HBox alignment="CENTER_RIGHT" spacing="6" styleClass="pagination">
+                    <Button text="←" styleClass="page-button" />
+                    <Button text="1" styleClass="page-button-active" />
+                    <Button text="2" styleClass="page-button" />
+                    <Button text="3" styleClass="page-button" />
+                    <Label text="…" styleClass="page-dots" />
+                    <Button text="2496" styleClass="page-button" />
+                    <Button text="→" styleClass="page-button" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+</BorderPane>
