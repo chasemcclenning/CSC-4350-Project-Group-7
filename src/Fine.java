@@ -1,11 +1,11 @@
 public class Fine {
     private String fineID;
-    private int checkoutID;
-    private int userID;
+    private String checkoutID;
+    private String userID;
     private double amount;  // dollar value of fine
     private String status;  // "Paid", "Unpaid", "Waived"
 
-    public Fine(String fineID, int checkoutID, int userID, double amount, String status) {
+    public Fine(String fineID, String checkoutID, String userID, double amount, String status) {
         this.fineID = fineID;
         this.checkoutID = checkoutID;
         this.userID = userID;
@@ -17,11 +17,11 @@ public class Fine {
         return fineID;
     }
 
-    public int getCheckoutID() {
+    public String getCheckoutID() {
         return checkoutID;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 

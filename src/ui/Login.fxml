@@ -24,16 +24,11 @@
         <VBox spacing="22" maxWidth="390" styleClass="login-form">
             <VBox spacing="6"><Label text="Welcome back" styleClass="login-title" /><Label text="Sign in to continue to the library system." styleClass="login-subtitle" /></VBox>
             <VBox spacing="8"><Label text="Email address" styleClass="login-field-label" /><TextField fx:id="loginEmail" promptText="Enter your email" styleClass="login-field" /></VBox>
-            <VBox spacing="8"><HBox alignment="CENTER_LEFT"><Label text="Password" styleClass="login-field-label" HBox.hgrow="ALWAYS" /><Button text="Forgot password?" styleClass="login-link" onAction="#showPlaceholder" /></HBox><PasswordField fx:id="loginPassword" promptText="Enter your password" styleClass="login-field" onAction="#signIn" /></VBox>
+            <VBox spacing="8"><HBox alignment="CENTER_LEFT"><Label text="Password" styleClass="login-field-label" HBox.hgrow="ALWAYS" /><Button text="Forgot password?" styleClass="login-link" onAction="#forgotPassword" /></HBox><PasswordField fx:id="loginPassword" promptText="Enter your password" styleClass="login-field" onAction="#signIn" /></VBox>
             <Label fx:id="loginError" visible="false" managed="false" wrapText="true" styleClass="login-error" />
             <HBox alignment="CENTER_LEFT" spacing="8"><CheckBox /><Label text="Keep me signed in" styleClass="remember-label" /></HBox>
             <Button text="Sign in" maxWidth="Infinity" styleClass="login-button" onAction="#signIn" />
-            <VBox spacing="5" styleClass="demo-accounts">
-                <Label text="DEMO ACCOUNTS" styleClass="demo-title" />
-                <TextField text="Librarian: librarian@library.org / library123" editable="false" styleClass="demo-credential" />
-                <TextField text="Member: member@library.org / member123" editable="false" styleClass="demo-credential" />
-            </VBox>
-            <HBox alignment="CENTER" spacing="5"><Label text="Need help signing in?" styleClass="login-help-text" /><Button text="Contact support" styleClass="login-link" onAction="#showPlaceholder" /></HBox>
+            <HBox alignment="CENTER" spacing="5"><Label text="Need help signing in?" styleClass="login-help-text" /><Button text="Contact support" styleClass="login-link" onAction="#showSupport" /></HBox>
         </VBox>
     </StackPane>
 </HBox>

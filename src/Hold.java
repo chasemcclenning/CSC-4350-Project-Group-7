@@ -3,16 +3,16 @@ import java.util.Date;
 public class Hold {
     private String holdID;
     private String userID;
-    private String copyID;
+    private String titleID;
     private int queuePosition;
     private String status;          // "Active", "Fulfilled", "Cancelled"
     private Date placedAt;
     private Date expiresAt;
 
-    public Hold(String holdID, String userID, String copyID, int queuePosition, String status, Date placedAt, Date expiresAt) {
+    public Hold(String holdID, String userID, String titleID, int queuePosition, String status, Date placedAt, Date expiresAt) {
         this.holdID = holdID;
         this.userID = userID;
-        this.copyID = copyID;
+        this.titleID = titleID;
         this.queuePosition = queuePosition;
         this.status = status;
         this.placedAt = placedAt;
@@ -27,8 +27,8 @@ public class Hold {
         return userID;
     }
 
-    public String getCopyID() {
-        return copyID;
+    public String getTitleID() {
+        return titleID;
     }
 
     public int getQueuePosition() {
@@ -51,7 +51,7 @@ public class Hold {
     public String toString() {
         return "Hold ID: " + holdID +
                ", User ID: " + userID +
-               ", Copy ID: " + copyID +
+               ", Title ID: " + titleID +
                ", Queue Position: " + queuePosition +
                ", Status: " + status +
                ", Placed Date: " + placedAt +

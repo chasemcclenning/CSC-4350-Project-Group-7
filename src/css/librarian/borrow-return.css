@@ -32,3 +32,34 @@
 .loan-active, .loan-overdue { -fx-background-radius: 10; -fx-padding: 4 7; -fx-font-size: 9px; -fx-font-weight: 700; }
 .loan-active { -fx-background-color: #eaf2ff; -fx-text-fill: #3975d5; }
 .loan-overdue { -fx-background-color: #ffeded; -fx-text-fill: #c94c4c; }
+
+.checkout-table {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0 14 14 14;
+}
+.checkout-table .column-header-background { -fx-background-color: #f7f8fa; }
+.checkout-table .column-header, .checkout-table .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #e8ebf0 transparent;
+    -fx-padding: 8 6;
+}
+.checkout-table .column-header .label {
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 9px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #7f899a;
+}
+.checkout-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #edf0f4 transparent;
+    -fx-cell-size: 48px;
+}
+.checkout-table .table-row-cell:selected { -fx-background-color: #fff5df; }
+.checkout-table .table-cell {
+    -fx-border-color: transparent;
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 11px;
+    -fx-text-fill: #46546a;
+    -fx-padding: 0 8;
+}

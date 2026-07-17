@@ -22,3 +22,10 @@
 .page-button, .page-button-active { -fx-background-radius: 6; -fx-min-width: 29; -fx-min-height: 29; -fx-font-size: 10px; -fx-font-weight: 700; -fx-cursor: hand; }
 .page-button { -fx-background-color: transparent; -fx-border-color: #e0e4ea; -fx-border-radius: 6; -fx-text-fill: #657084; }
 .page-button-active { -fx-background-color: #172033; -fx-text-fill: white; }
+.audit-table { -fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 0 16 16 16; }
+.audit-table .column-header-background { -fx-background-color: #f7f8fa; }
+.audit-table .column-header, .audit-table .filler { -fx-background-color: transparent; -fx-border-color: transparent transparent #e8ebf0 transparent; -fx-padding: 8 6; }
+.audit-table .column-header .label { -fx-alignment: CENTER_LEFT; -fx-font-size: 9px; -fx-font-weight: 800; -fx-text-fill: #7f899a; }
+.audit-table .table-row-cell { -fx-background-color: white; -fx-border-color: transparent transparent #edf0f4 transparent; -fx-cell-size: 50px; }
+.audit-table .table-row-cell:selected { -fx-background-color: #fff5df; }
+.audit-table .table-cell { -fx-border-color: transparent; -fx-alignment: CENTER_LEFT; -fx-font-size: 10px; -fx-text-fill: #46546a; -fx-padding: 0 8; }

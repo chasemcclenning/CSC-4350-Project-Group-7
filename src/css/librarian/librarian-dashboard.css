@@ -84,6 +84,10 @@
 .activity-icon-green { -fx-background-color: #e8f8f1; -fx-text-fill: #26966a; }
 .activity-icon-violet { -fx-background-color: #f1edff; -fx-text-fill: #7454cf; }
 .activity-icon-orange { -fx-background-color: #fff3df; -fx-text-fill: #c97809; }
+.search-results { -fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #dfe5ef; -fx-border-radius: 12; -fx-padding: 10; }
+.search-result { -fx-background-color: transparent; -fx-text-fill: #253552; -fx-alignment: center-left; -fx-padding: 12 14; -fx-cursor: hand; }
+.search-result:hover { -fx-background-color: #fff3df; -fx-background-radius: 8; }
+.dashboard-link-row { -fx-cursor: hand; }
 
 .row-title {
     -fx-font-size: 12px;

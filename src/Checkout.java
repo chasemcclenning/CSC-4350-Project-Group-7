@@ -1,15 +1,15 @@
 import java.util.Date;
 
 public class Checkout {
-    private int checkoutId;
-    private int memberID;
-    private int copyID;
+    private String checkoutId;
+    private String memberID;
+    private String copyID;
     private Date checkoutDate;
     private Date dueDate;
     private Date returnDate;
 
     // constrctor for a new checkout (checkoutID AND returnDate are unknown)
-    public Checkout(int memberID, int copyID, Date checkoutDate, Date dueDate) {
+    public Checkout(String memberID, String copyID, Date checkoutDate, Date dueDate) {
         this.memberID = memberID;
         this.copyID = copyID;
         this.checkoutDate = checkoutDate;
@@ -18,7 +18,7 @@ public class Checkout {
     }
 
     // full constructor (for read statements)
-    public Checkout(int checkoutId, int memberID, int copyID, Date checkoutDate, Date dueDate, Date returnDate) {
+    public Checkout(String checkoutId, String memberID, String copyID, Date checkoutDate, Date dueDate, Date returnDate) {
         this.checkoutId = checkoutId;
         this.memberID = memberID;
         this.copyID = copyID;
@@ -27,15 +27,15 @@ public class Checkout {
         this.returnDate = returnDate;
     }
 
-    public int getCheckoutId() {
+    public String getCheckoutId() {
         return checkoutId;
     }
 
-    public int getMemberId() {
+    public String getMemberId() {
         return memberID;
     }
 
-    public int getCopyId() {
+    public String getCopyId() {
         return copyID;
     }
 

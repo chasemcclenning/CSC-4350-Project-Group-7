@@ -309,7 +309,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('u-001','Alice Morgan','alice@example.com','hashed_pw_1','patron',0.00),('u-002','Bob Chen','bob@example.com','hashed_pw_2','patron',0.00),('u-003','Carol Reyes','carol@example.com','hashed_pw_3','librarian',0.00),('u-004','David Park','david@example.com','hashed_pw_4','admin',0.00);
+INSERT INTO `user` VALUES ('u-001','Alice Morgan','alice@example.com','hashed_pw_1','patron',0.00),('u-002','Bob Chen','bob@example.com','hashed_pw_2','patron',0.00),('u-003','Carol Reyes','carol@example.com','hashed_pw_3','librarian',0.00),('u-004','David Park','david@example.com','hashed_pw_4','admin',0.00),('u-005','Librarian Sample','librarian@example.com','libexample1','librarian',0.00),('u-006','Member Sample','member@example.com','memexample1','patron',0.00);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 

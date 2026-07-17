@@ -1,15 +1,15 @@
 import java.util.Date;
 
 public class AuditLog {
-    private int logID;
-    private int userID;
+    private String logID;
+    private String userID;
     private String action;
     private String entityType;
-    private int entityID;
+    private String entityID;
     private String notes;
     private Date createdAt;
 
-    public AuditLog(int logID, int userID, String action, String entityType, int entityID, String notes, Date createdAt) {
+    public AuditLog(String logID, String userID, String action, String entityType, String entityID, String notes, Date createdAt) {
         this.logID = logID;
         this.userID = userID;
         this.action = action;
@@ -19,11 +19,11 @@ public class AuditLog {
         this.createdAt = createdAt;
     }
 
-    public int getLogID() {
+    public String getLogID() {
         return logID;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
@@ -35,7 +35,7 @@ public class AuditLog {
         return entityType;
     }
 
-    public int getEntityID() {
+    public String getEntityID() {
         return entityID;
     }
 

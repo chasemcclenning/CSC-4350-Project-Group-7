@@ -1,0 +1,6 @@
+.profile-content { -fx-padding: 34 40; -fx-background-color: #f5f7fb; }
+.profile-hero, .profile-card { -fx-background-color: white; -fx-background-radius: 16; -fx-border-color: #dfe5ef; -fx-border-radius: 16; -fx-padding: 24; }
+.profile-heading { -fx-font-size: 30px; -fx-font-weight: 800; -fx-text-fill: #14213a; }
+.profile-value { -fx-font-size: 16px; -fx-text-fill: #425572; }
+.profile-stat { -fx-font-size: 28px; -fx-font-weight: 800; -fx-text-fill: #14213a; }
+.profile-row { -fx-padding: 12 0; -fx-text-fill: #425572; -fx-font-size: 14px; }

@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<BorderPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ui.librarian.NavigationController"
-            prefWidth="1440" prefHeight="900"
-            styleClass="root-pane">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="ui.librarian.BorrowReturnController" prefWidth="1440" prefHeight="900" styleClass="root-pane">
     <left>
         <VBox prefWidth="248" styleClass="sidebar">
             <HBox alignment="CENTER_LEFT" spacing="12" styleClass="brand-block">
@@ -23,7 +19,7 @@
                 <Button text="◷   Holds" maxWidth="Infinity" styleClass="nav-button" onAction="#showHolds" />
                 <Button text="\$   Fines" maxWidth="Infinity" styleClass="nav-button" onAction="#showFines" />
             </VBox>
-            <Label text="MANAGEMENT" styleClass="nav-section-label" />
+            <Label text="MANAGEMENT" styleClass="nav-section-label"><VBox.margin><Insets top="20" /></VBox.margin></Label>
             <VBox spacing="6" styleClass="nav-list">
                 <Button text="▦   Audit Log" maxWidth="Infinity" styleClass="nav-button" onAction="#showAuditLog" />
                 <Button text="▥   Reports" maxWidth="Infinity" styleClass="nav-button" onAction="#showReports" />
@@ -31,65 +27,31 @@
             </VBox>
             <Pane VBox.vgrow="ALWAYS" />
             <HBox alignment="CENTER_LEFT" spacing="10" styleClass="sidebar-profile">
-                <StackPane styleClass="avatar-small"><Label text="AO" styleClass="avatar-text" /></StackPane>
-                <VBox spacing="2" HBox.hgrow="ALWAYS"><Label text="Alex Owens" styleClass="profile-name" /><Label text="Librarian" styleClass="profile-role" /></VBox>
+                <StackPane styleClass="avatar-small"><Label fx:id="sidebarProfileInitials" text="L" styleClass="avatar-text" /></StackPane>
+                <VBox spacing="2" HBox.hgrow="ALWAYS"><Label fx:id="sidebarProfileName" text="Signed-in librarian" styleClass="profile-name" /><Label text="Librarian" styleClass="profile-role" /></VBox>
                 <Button text="↪" styleClass="icon-button-quiet" onAction="#showLogin" />
             </HBox>
         </VBox>
     </left>
-
     <center>
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="borrow-scroll">
             <content>
                 <VBox spacing="22" styleClass="borrow-content">
-                    <VBox spacing="4">
-                        <Label text="Borrow &amp; Return" styleClass="page-title" />
-                        <Label text="Check out available copies and process returned books." styleClass="page-subtitle" />
-                    </VBox>
-
-                    <HBox spacing="18">
-                        <VBox spacing="16" styleClass="transaction-card" HBox.hgrow="ALWAYS">
-                            <HBox alignment="CENTER_LEFT" spacing="12">
-                                <Label text="⇄" styleClass="transaction-icon, checkout-icon" />
-                                <VBox spacing="3"><Label text="Check out a book" styleClass="section-title" /><Label text="Create a 14-day loan for a member" styleClass="section-subtitle" /></VBox>
-                            </HBox>
-                            <VBox spacing="7"><Label text="Member ID" styleClass="field-label" /><TextField promptText="Enter member ID" styleClass="form-field" /></VBox>
-                            <VBox spacing="7"><Label text="Copy ID" styleClass="field-label" /><TextField promptText="Enter copy ID" styleClass="form-field" /></VBox>
-                            <HBox spacing="12">
-                                <VBox spacing="7" HBox.hgrow="ALWAYS"><Label text="Checkout date" styleClass="field-label" /><DatePicker promptText="Select date" maxWidth="Infinity" styleClass="form-field" /></VBox>
-                                <VBox spacing="7" HBox.hgrow="ALWAYS"><Label text="Due date" styleClass="field-label" /><DatePicker promptText="14 days later" maxWidth="Infinity" styleClass="form-field" /></VBox>
-                            </HBox>
-                            <Button text="Check out book" maxWidth="Infinity" styleClass="primary-button, transaction-button" onAction="#showPlaceholder" />
-                        </VBox>
-
-                        <VBox spacing="16" styleClass="transaction-card" HBox.hgrow="ALWAYS">
-                            <HBox alignment="CENTER_LEFT" spacing="12">
-                                <Label text="✓" styleClass="transaction-icon, return-icon" />
-                                <VBox spacing="3"><Label text="Return a book" styleClass="section-title" /><Label text="Close an active checkout record" styleClass="section-subtitle" /></VBox>
-                            </HBox>
-                            <VBox spacing="7"><Label text="Checkout ID" styleClass="field-label" /><TextField promptText="Enter checkout ID" styleClass="form-field" /></VBox>
-                            <VBox spacing="7"><Label text="Copy ID" styleClass="field-label" /><TextField promptText="Enter copy ID" styleClass="form-field" /></VBox>
-                            <VBox spacing="7"><Label text="Return date" styleClass="field-label" /><DatePicker promptText="Select return date" maxWidth="Infinity" styleClass="form-field" /></VBox>
-                            <Region VBox.vgrow="ALWAYS" />
-                            <Button text="Process return" maxWidth="Infinity" styleClass="return-button, transaction-button" onAction="#showPlaceholder" />
-                        </VBox>
-                    </HBox>
-
-                    <VBox spacing="0" styleClass="loans-panel">
-                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="loans-header">
-                            <VBox spacing="3" HBox.hgrow="ALWAYS"><Label text="Active checkouts" styleClass="section-title" /><Label text="Current borrowing records" styleClass="section-subtitle" /></VBox>
-                            <TextField promptText="Search checkout ID" prefWidth="210" styleClass="loan-search" />
-                            <Button text="Search" styleClass="secondary-button" onAction="#showPlaceholder" />
+                    <VBox spacing="4"><Label text="Borrow &amp; Return" styleClass="page-title" /><Label text="Check out available copies and process returns." styleClass="page-subtitle" /></VBox>
+                    <VBox spacing="16" styleClass="transaction-card">
+                        <HBox alignment="CENTER_LEFT" spacing="12"><Label text="⇄" styleClass="transaction-icon, checkout-icon" /><VBox spacing="2"><Label text="New checkout" styleClass="section-title" /><Label text="Select a member and an available copy." styleClass="section-subtitle" /></VBox></HBox>
+                        <HBox spacing="12" alignment="BOTTOM_LEFT">
+                            <VBox spacing="7" HBox.hgrow="ALWAYS"><Label text="MEMBER" styleClass="field-label" /><ComboBox fx:id="member" promptText="Select member" maxWidth="Infinity" styleClass="form-field" /></VBox>
+                            <VBox spacing="7" HBox.hgrow="ALWAYS"><Label text="AVAILABLE BOOK" styleClass="field-label" /><ComboBox fx:id="copy" promptText="Select an available book" maxWidth="Infinity" styleClass="form-field" /></VBox>
+                            <Button text="Check out book" styleClass="primary-button, transaction-button" onAction="#checkout" />
                         </HBox>
-                        <GridPane styleClass="loan-table-header">
-                            <columnConstraints><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="20" /><ColumnConstraints percentWidth="20" /><ColumnConstraints percentWidth="17" /><ColumnConstraints percentWidth="17" /><ColumnConstraints percentWidth="11" /></columnConstraints>
-                            <Label text="CHECKOUT ID" styleClass="column-label" GridPane.columnIndex="0" /><Label text="MEMBER ID" styleClass="column-label" GridPane.columnIndex="1" /><Label text="COPY ID" styleClass="column-label" GridPane.columnIndex="2" /><Label text="CHECKED OUT" styleClass="column-label" GridPane.columnIndex="3" /><Label text="DUE DATE" styleClass="column-label" GridPane.columnIndex="4" /><Label text="STATUS" styleClass="column-label" GridPane.columnIndex="5" />
-                        </GridPane>
-                        <VBox spacing="0">
-                            <GridPane styleClass="loan-row"><columnConstraints><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="20" /><ColumnConstraints percentWidth="20" /><ColumnConstraints percentWidth="17" /><ColumnConstraints percentWidth="17" /><ColumnConstraints percentWidth="11" /></columnConstraints><Label text="C-2841" styleClass="record-id" GridPane.columnIndex="0" /><Label text="U-10428" styleClass="cell-text" GridPane.columnIndex="1" /><Label text="CP-8331" styleClass="cell-text" GridPane.columnIndex="2" /><Label text="Jul 12, 2026" styleClass="cell-text" GridPane.columnIndex="3" /><Label text="Jul 26, 2026" styleClass="cell-text" GridPane.columnIndex="4" /><Label text="On loan" styleClass="loan-active" GridPane.columnIndex="5" /></GridPane>
-                            <GridPane styleClass="loan-row"><columnConstraints><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="20" /><ColumnConstraints percentWidth="20" /><ColumnConstraints percentWidth="17" /><ColumnConstraints percentWidth="17" /><ColumnConstraints percentWidth="11" /></columnConstraints><Label text="C-2842" styleClass="record-id" GridPane.columnIndex="0" /><Label text="U-10429" styleClass="cell-text" GridPane.columnIndex="1" /><Label text="CP-8332" styleClass="cell-text" GridPane.columnIndex="2" /><Label text="Jul 10, 2026" styleClass="cell-text" GridPane.columnIndex="3" /><Label text="Jul 24, 2026" styleClass="cell-text" GridPane.columnIndex="4" /><Label text="On loan" styleClass="loan-active" GridPane.columnIndex="5" /></GridPane>
-                            <GridPane styleClass="loan-row, loan-row-last"><columnConstraints><ColumnConstraints percentWidth="15" /><ColumnConstraints percentWidth="20" /><ColumnConstraints percentWidth="20" /><ColumnConstraints percentWidth="17" /><ColumnConstraints percentWidth="17" /><ColumnConstraints percentWidth="11" /></columnConstraints><Label text="C-2843" styleClass="record-id" GridPane.columnIndex="0" /><Label text="U-10430" styleClass="cell-text" GridPane.columnIndex="1" /><Label text="CP-8333" styleClass="cell-text" GridPane.columnIndex="2" /><Label text="Jul 2, 2026" styleClass="cell-text" GridPane.columnIndex="3" /><Label text="Jul 16, 2026" styleClass="cell-text" GridPane.columnIndex="4" /><Label text="Overdue" styleClass="loan-overdue" GridPane.columnIndex="5" /></GridPane>
-                        </VBox>
+                    </VBox>
+                    <VBox spacing="0" VBox.vgrow="ALWAYS" styleClass="loans-panel">
+                        <HBox alignment="CENTER_LEFT" spacing="12" styleClass="loans-header"><VBox spacing="3" HBox.hgrow="ALWAYS"><Label text="Currently borrowed books" styleClass="section-title" /><Label fx:id="count" text="Loading borrowed books…" styleClass="section-subtitle" /></VBox><Button text="Refresh" styleClass="secondary-button" onAction="#refresh" /><Button text="Return selected book" styleClass="return-button" onAction="#returned" /></HBox>
+                        <TableView fx:id="table" VBox.vgrow="ALWAYS" styleClass="checkout-table">
+                            <columns><TableColumn fx:id="idCol" text="CHECKOUT ID" prefWidth="125" /><TableColumn fx:id="memberCol" text="MEMBER" prefWidth="180" /><TableColumn fx:id="copyCol" text="COPY ID" prefWidth="115" /><TableColumn fx:id="titleCol" text="TITLE" prefWidth="300" /><TableColumn fx:id="dueCol" text="DUE DATE" prefWidth="170" /><TableColumn fx:id="statusCol" text="STATUS" prefWidth="120" /></columns>
+                            <placeholder><Label text="No books are currently borrowed." styleClass="section-subtitle" /></placeholder>
+                        </TableView>
                     </VBox>
                 </VBox>
             </content>

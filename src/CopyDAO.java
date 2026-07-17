@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import database.DBConn;
 
 public class CopyDAO {
     
@@ -27,7 +28,7 @@ public class CopyDAO {
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                String copyID = rs.getString("copy_id");
+                String copyID = rs.getString("id");
                 String titleID = rs.getString("title_id");
                 String status = rs.getString("status");
                 String condition = rs.getString("condition");
@@ -43,7 +44,7 @@ public class CopyDAO {
     public void updateCopyDetails(Copy copy) throws SQLException {
         Connection conn = DBConn.getInstance();
 
-        String sql = "UPDATE copy SET title_id = ?, status = ?, condition = ? WHERE copy_id = ?";
+        String sql = "UPDATE copy SET title_id = ?, status = ?, `condition` = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, copy.getTitleID());
             stmt.setString(2, copy.getStatus());
@@ -57,7 +58,7 @@ public class CopyDAO {
     public void deleteCopy(String copyID) throws SQLException {
         Connection conn = DBConn.getInstance();
 
-        String sql = "DELETE FROM copy WHERE copy_id = ?";
+        String sql = "DELETE FROM copy WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, copyID);
             stmt.executeUpdate();

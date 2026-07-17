@@ -1,0 +1,5 @@
+# Copy this file to database.properties and enter your local MySQL credentials.
+# database.properties is ignored by Git so passwords are never committed.
+url=jdbc:mysql://localhost:3306/librarydb
+user=root
+password=your_mysql_password
