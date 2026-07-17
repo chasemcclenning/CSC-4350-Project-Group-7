@@ -1,35 +1,34 @@
 import java.util.Date;
 
 public class Hold {
-    private int holdID;
-    private int userID;
-    private int titleID;
+    private String holdID;
+    private String userID;
+    private String copyID;
     private int queuePosition;
-    private String status;  // "Active", "Fulfilled", "Cancelled"
-    private Date placedDate;
-    // unsure if there should be a fulfilledDate or not
-    private Date expirationDate;
+    private String status;          // "Active", "Fulfilled", "Cancelled"
+    private Date placedAt;
+    private Date expiresAt;
 
-    public Hold(int holdID, int userID, int titleID, int queuePosition, String status, Date placedDate, Date expirationDate) {
+    public Hold(String holdID, String userID, String copyID, int queuePosition, String status, Date placedAt, Date expiresAt) {
         this.holdID = holdID;
         this.userID = userID;
-        this.titleID = titleID;
+        this.copyID = copyID;
         this.queuePosition = queuePosition;
         this.status = status;
-        this.placedDate = placedDate;
-        this.expirationDate = expirationDate;
+        this.placedAt = placedAt;
+        this.expiresAt = expiresAt;
     }
 
-    public int getHoldID() {
+    public String getHoldID() {
         return holdID;
     }
 
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public int getTitleID() {
-        return titleID;
+    public String getCopyID() {
+        return copyID;
     }
 
     public int getQueuePosition() {
@@ -40,22 +39,22 @@ public class Hold {
         return status;
     }
 
-    public Date getPlacedDate() {
-        return placedDate;
+    public Date getPlacedAt() {
+        return placedAt;
     }
 
-    public Date getExpirationDate() {
-        return expirationDate;
+    public Date getExpiresAt() {
+        return expiresAt;
     }
 
     @Override
     public String toString() {
         return "Hold ID: " + holdID +
                ", User ID: " + userID +
-               ", Title ID: " + titleID +
+               ", Copy ID: " + copyID +
                ", Queue Position: " + queuePosition +
                ", Status: " + status +
-               ", Placed Date: " + placedDate +
-               ", Expiration Date: " + expirationDate;
+               ", Placed Date: " + placedAt +
+               ", Expiration Date: " + expiresAt;
     }
 }

@@ -1,24 +1,24 @@
 public class Fine {
-    private int fineID;
-    private int CheckoutID;
+    private String fineID;
+    private int checkoutID;
     private int userID;
-    private double fineAmount;
+    private double amount;  // dollar value of fine
     private String status;  // "Paid", "Unpaid", "Waived"
 
-    public Fine(int fineID, int checkoutID, int userID, double fineAmount, String status) {
+    public Fine(String fineID, int checkoutID, int userID, double amount, String status) {
         this.fineID = fineID;
-        this.CheckoutID = checkoutID;
+        this.checkoutID = checkoutID;
         this.userID = userID;
-        this.fineAmount = fineAmount;
+        this.amount = amount;
         this.status = status;
     }
 
-    public int getFineID() {
+    public String getFineID() {
         return fineID;
     }
 
     public int getCheckoutID() {
-        return CheckoutID;
+        return checkoutID;
     }
 
     public int getUserID() {
@@ -26,7 +26,7 @@ public class Fine {
     }
 
     public double getFineAmount() {
-        return fineAmount;
+        return amount;
     }
 
     public String getStatus() {
@@ -36,9 +36,9 @@ public class Fine {
     @Override
     public String toString() {
         return "Fine ID: " + fineID +
-               ", Checkout ID: " + CheckoutID +
+               ", Checkout ID: " + checkoutID +
                ", User ID: " + userID +
-               ", Fine Amount: " + fineAmount +
+               ", Fine Amount: " + amount +
                ", Status: " + status;
     }
 }
