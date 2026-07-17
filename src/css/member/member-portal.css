@@ -1,0 +1,33 @@
+.member-root { -fx-background-color: #f6f7fb; -fx-font-family: "Inter", "SF Pro Display", "Segoe UI", sans-serif; }
+.member-header { -fx-background-color: white; -fx-border-color: transparent transparent #e5e9ef transparent; -fx-padding: 16 32; }
+.member-brand { -fx-font-size: 20px; -fx-font-weight: 900; -fx-text-fill: #172033; }
+.member-brand-mark { -fx-alignment: center; -fx-background-color: #f59e0b; -fx-background-radius: 9; -fx-min-width: 34; -fx-min-height: 34; -fx-font-size: 18px; -fx-font-weight: 900; -fx-text-fill: white; }
+.member-nav, .member-nav-active { -fx-background-radius: 7; -fx-padding: 8 12; -fx-font-size: 10px; -fx-font-weight: 700; -fx-cursor: hand; }
+.member-nav { -fx-background-color: transparent; -fx-text-fill: #657084; }
+.member-nav:hover { -fx-background-color: #f4f6f9; }
+.member-nav-active { -fx-background-color: #fff3dc; -fx-text-fill: #a96306; }
+.member-profile-button { -fx-background-color: #172033; -fx-background-radius: 18; -fx-min-width: 36; -fx-min-height: 36; -fx-font-size: 10px; -fx-font-weight: 800; -fx-text-fill: white; -fx-cursor: hand; }
+.member-content { -fx-padding: 30 38 36 38; }
+.member-scroll, .member-scroll > .viewport { -fx-background-color: transparent; }
+.member-scroll { -fx-padding: 0; -fx-background-insets: 0; }
+.member-page-title { -fx-font-size: 27px; -fx-font-weight: 900; -fx-text-fill: #172033; }
+.member-page-subtitle { -fx-font-size: 12px; -fx-text-fill: #7c879b; }
+.member-section-title { -fx-font-size: 17px; -fx-font-weight: 800; -fx-text-fill: #202b40; }
+.member-card { -fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #e5e9ef; -fx-border-radius: 12; -fx-padding: 18; }
+.member-primary { -fx-background-color: #172033; -fx-background-radius: 8; -fx-padding: 10 15; -fx-font-size: 10px; -fx-font-weight: 800; -fx-text-fill: white; -fx-cursor: hand; }
+.member-secondary { -fx-background-color: white; -fx-background-radius: 7; -fx-border-color: #dce1e8; -fx-border-radius: 7; -fx-padding: 8 11; -fx-font-size: 9px; -fx-font-weight: 700; -fx-text-fill: #4e5b70; -fx-cursor: hand; }
+.member-search { -fx-background-color: white; -fx-background-radius: 9; -fx-border-color: #dfe4eb; -fx-border-radius: 9; -fx-padding: 11 14; -fx-font-size: 11px; }
+.member-stat-label { -fx-font-size: 9px; -fx-font-weight: 800; -fx-text-fill: #8590a3; }
+.member-stat-number { -fx-font-size: 24px; -fx-font-weight: 900; -fx-text-fill: #172033; }
+.member-row { -fx-padding: 13 0; -fx-border-color: transparent transparent #edf0f4 transparent; }
+.member-row-last { -fx-border-color: transparent; }
+.member-book-title { -fx-font-size: 11px; -fx-font-weight: 800; -fx-text-fill: #29364c; }
+.member-meta { -fx-font-size: 9px; -fx-text-fill: #7e899b; }
+.member-status, .member-status-warn, .member-status-good { -fx-background-radius: 10; -fx-padding: 4 7; -fx-font-size: 9px; -fx-font-weight: 700; }
+.member-status { -fx-background-color: #eaf2ff; -fx-text-fill: #3975d5; }
+.member-status-warn { -fx-background-color: #ffeded; -fx-text-fill: #c94c4c; }
+.member-status-good { -fx-background-color: #e8f7ef; -fx-text-fill: #23875f; }
+.catalog-grid-card { -fx-background-color: white; -fx-background-radius: 11; -fx-border-color: #e5e9ef; -fx-border-radius: 11; -fx-padding: 16; -fx-min-height: 170; }
+.book-genre { -fx-background-color: #edf2fa; -fx-background-radius: 9; -fx-padding: 4 7; -fx-font-size: 8px; -fx-font-weight: 700; -fx-text-fill: #536a86; }
+.account-field { -fx-background-color: #f8f9fb; -fx-background-radius: 8; -fx-border-color: #e1e5ec; -fx-border-radius: 8; -fx-padding: 10 12; -fx-font-size: 10px; }
+.field-label { -fx-font-size: 9px; -fx-font-weight: 800; -fx-text-fill: #596579; }

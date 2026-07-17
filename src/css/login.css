@@ -17,3 +17,7 @@
 .remember-label, .login-help-text { -fx-font-size: 9px; -fx-text-fill: #748095; }
 .login-button { -fx-background-color: #172033; -fx-background-radius: 8; -fx-padding: 12; -fx-font-size: 12px; -fx-font-weight: 800; -fx-text-fill: white; -fx-cursor: hand; }
 .login-button:hover { -fx-background-color: #28364e; }
+.login-error { -fx-background-color: #ffeded; -fx-background-radius: 7; -fx-padding: 8 10; -fx-font-size: 9px; -fx-font-weight: 700; -fx-text-fill: #bd4444; }
+.demo-accounts { -fx-background-color: #f7f8fa; -fx-background-radius: 8; -fx-border-color: #e5e9ef; -fx-border-radius: 8; -fx-padding: 10; }
+.demo-title { -fx-font-size: 8px; -fx-font-weight: 900; -fx-text-fill: #8993a5; }
+.demo-credential { -fx-background-color: transparent; -fx-background-insets: 0; -fx-padding: 2 0; -fx-font-size: 8px; -fx-text-fill: #667287; }

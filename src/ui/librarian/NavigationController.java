@@ -9,6 +9,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 public class NavigationController {
 
@@ -22,6 +25,9 @@ public class NavigationController {
     @FXML private Button circulationSettingsButton;
     @FXML private Button notificationSettingsButton;
     @FXML private Button backupSettingsButton;
+    @FXML private TextField loginEmail;
+    @FXML private PasswordField loginPassword;
+    @FXML private Label loginError;
 
     public void showDashboard(ActionEvent event) throws IOException {
         navigate(event, "LibrarianDashboard.fxml", "librarian-dashboard.css");
@@ -29,6 +35,42 @@ public class NavigationController {
 
     public void showLogin(ActionEvent event) throws IOException {
         navigateFromRoot(event, "/ui/Login.fxml", "/css/login.css");
+    }
+
+    public void signIn(ActionEvent event) throws IOException {
+        String email = loginEmail.getText().trim();
+        String password = loginPassword.getText();
+
+        if (email.equals("librarian@library.org") && password.equals("library123")) {
+            showDashboard(event);
+            return;
+        }
+        if (email.equals("member@library.org") && password.equals("member123")) {
+            showMemberHome(event);
+            return;
+        }
+
+        loginError.setText(email.isEmpty() || password.isEmpty()
+                ? "Enter your email and password."
+                : "The email or password is incorrect.");
+        loginError.setVisible(true);
+        loginError.setManaged(true);
+    }
+
+    public void showMemberHome(ActionEvent event) throws IOException {
+        navigateMember(event, "MemberHome.fxml");
+    }
+
+    public void showMemberCatalog(ActionEvent event) throws IOException {
+        navigateMember(event, "MemberCatalog.fxml");
+    }
+
+    public void showMemberBooks(ActionEvent event) throws IOException {
+        navigateMember(event, "MemberBooks.fxml");
+    }
+
+    public void showMemberAccount(ActionEvent event) throws IOException {
+        navigateMember(event, "MemberAccount.fxml");
     }
 
     public void showBooks(ActionEvent event) throws IOException {
@@ -89,6 +131,10 @@ public class NavigationController {
 
     private void navigate(ActionEvent event, String fxmlFile, String pageStylesheet) throws IOException {
         navigateFromRoot(event, "/ui/librarian/" + fxmlFile, "/css/librarian/" + pageStylesheet);
+    }
+
+    private void navigateMember(ActionEvent event, String fxmlFile) throws IOException {
+        navigateFromRoot(event, "/ui/member/" + fxmlFile, "/css/member/member-portal.css");
     }
 
     private void navigateFromRoot(ActionEvent event, String fxmlPath, String pageStylesheet) throws IOException {
