@@ -1,0 +1,46 @@
+.settings-content { -fx-padding: 30 34 34 34; }
+
+.settings-menu {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-color: #e5e9ef;
+    -fx-border-radius: 12;
+    -fx-padding: 16;
+}
+
+.settings-menu-label { -fx-padding: 0 10 8 10; -fx-font-size: 9px; -fx-font-weight: 800; -fx-text-fill: #949dad; }
+.settings-menu-button, .settings-menu-active { -fx-background-radius: 8; -fx-alignment: CENTER_LEFT; -fx-padding: 10 12; -fx-font-size: 11px; -fx-font-weight: 700; -fx-cursor: hand; }
+.settings-menu-button { -fx-background-color: transparent; -fx-text-fill: #657084; }
+.settings-menu-button:hover { -fx-background-color: #f5f7fa; }
+.settings-menu-active { -fx-background-color: #fff3dc; -fx-text-fill: #a96306; }
+
+.settings-help { -fx-background-color: #f7f8fa; -fx-background-radius: 9; -fx-padding: 12; }
+.help-title { -fx-font-size: 11px; -fx-font-weight: 800; -fx-text-fill: #354158; }
+.help-text { -fx-font-size: 9px; -fx-text-fill: #7f899a; }
+.help-button { -fx-background-color: transparent; -fx-padding: 5 0 0 0; -fx-font-size: 9px; -fx-font-weight: 800; -fx-text-fill: #a96306; -fx-cursor: hand; }
+
+.settings-scroll, .settings-scroll > .viewport { -fx-background-color: transparent; }
+.settings-scroll { -fx-padding: 0; -fx-background-insets: 0; }
+.settings-form { -fx-padding: 0 2 2 0; }
+.settings-title { -fx-font-size: 21px; -fx-font-weight: 800; -fx-text-fill: #172033; }
+
+.settings-section, .backup-card {
+    -fx-background-color: white;
+    -fx-background-radius: 11;
+    -fx-border-color: #e5e9ef;
+    -fx-border-radius: 11;
+    -fx-padding: 18;
+}
+
+.settings-section-title { -fx-font-size: 13px; -fx-font-weight: 800; -fx-text-fill: #2b374c; }
+.field-label { -fx-font-size: 10px; -fx-font-weight: 800; -fx-text-fill: #596579; }
+.settings-field { -fx-background-color: #f8f9fb; -fx-background-radius: 8; -fx-border-color: #e1e5ec; -fx-border-radius: 8; -fx-font-size: 11px; -fx-padding: 9 11; }
+.notification-heading { -fx-padding: 0 0 12 0; }
+.preference-row { -fx-border-color: #edf0f4 transparent transparent transparent; -fx-padding: 13 0; }
+.preference-title { -fx-font-size: 11px; -fx-font-weight: 700; -fx-text-fill: #2d394d; }
+.preference-detail { -fx-font-size: 9px; -fx-text-fill: #818b9d; }
+
+.backup-card { -fx-padding: 14 18; }
+.backup-icon { -fx-alignment: center; -fx-background-color: #eaf2ff; -fx-background-radius: 9; -fx-min-width: 38; -fx-min-height: 38; -fx-font-size: 16px; -fx-text-fill: #3975d5; }
+.backup-status { -fx-background-color: #e8f7ef; -fx-background-radius: 10; -fx-padding: 4 8; -fx-font-size: 9px; -fx-font-weight: 700; -fx-text-fill: #23875f; }
+.settings-actions { -fx-padding: 4 0 0 0; }

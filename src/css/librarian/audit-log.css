@@ -1,0 +1,24 @@
+.audit-content { -fx-padding: 30 34 34 34; }
+.audit-toolbar { -fx-background-color: white; -fx-background-radius: 11; -fx-border-color: #e5e9ef; -fx-border-radius: 11; -fx-padding: 14; }
+.audit-search, .audit-filter { -fx-background-color: #f8f9fb; -fx-background-radius: 8; -fx-border-color: #e2e6ed; -fx-border-radius: 8; -fx-font-size: 11px; }
+.audit-search { -fx-padding: 10 13; }
+.audit-filter { -fx-padding: 2 5; }
+.audit-panel { -fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #e5e9ef; -fx-border-radius: 12; }
+.audit-panel-header { -fx-padding: 18 20; }
+.result-count { -fx-font-size: 10px; -fx-text-fill: #8b95a7; }
+.audit-table-header { -fx-background-color: #f7f8fa; -fx-border-color: #e8ebf0 transparent #e8ebf0 transparent; -fx-padding: 10 18; }
+.column-label { -fx-font-size: 9px; -fx-font-weight: 800; -fx-text-fill: #7f899a; }
+.audit-row { -fx-padding: 14 18; -fx-border-color: transparent transparent #edf0f4 transparent; -fx-min-height: 65; }
+.audit-row:hover { -fx-background-color: #fafbfc; }
+.audit-row-last { -fx-border-color: transparent; }
+.log-id { -fx-font-size: 10px; -fx-font-weight: 800; -fx-text-fill: #34445c; }
+.cell-text, .note-text { -fx-font-size: 10px; -fx-text-fill: #586477; }
+.note-text { -fx-text-fill: #707b8e; }
+.action-create, .action-update, .action-delete { -fx-background-radius: 10; -fx-padding: 4 7; -fx-font-size: 9px; -fx-font-weight: 700; }
+.action-create { -fx-background-color: #e8f7ef; -fx-text-fill: #23875f; }
+.action-update { -fx-background-color: #eaf2ff; -fx-text-fill: #3975d5; }
+.action-delete { -fx-background-color: #ffeded; -fx-text-fill: #c94c4c; }
+.pagination { -fx-border-color: #edf0f4 transparent transparent transparent; -fx-padding: 12 18; }
+.page-button, .page-button-active { -fx-background-radius: 6; -fx-min-width: 29; -fx-min-height: 29; -fx-font-size: 10px; -fx-font-weight: 700; -fx-cursor: hand; }
+.page-button { -fx-background-color: transparent; -fx-border-color: #e0e4ea; -fx-border-radius: 6; -fx-text-fill: #657084; }
+.page-button-active { -fx-background-color: #172033; -fx-text-fill: white; }

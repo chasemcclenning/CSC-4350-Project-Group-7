@@ -1,0 +1,28 @@
+.fines-content { -fx-padding: 30 34 34 34; }
+.fines-toolbar { -fx-background-color: white; -fx-background-radius: 11; -fx-border-color: #e5e9ef; -fx-border-radius: 11; -fx-padding: 14; }
+.fines-search, .fine-filter { -fx-background-color: #f8f9fb; -fx-background-radius: 8; -fx-border-color: #e2e6ed; -fx-border-radius: 8; -fx-font-size: 12px; }
+.fines-search { -fx-padding: 10 13; }
+.fine-filter { -fx-padding: 2 5; }
+.fines-panel { -fx-background-color: white; -fx-background-radius: 12; -fx-border-color: #e5e9ef; -fx-border-radius: 12; }
+.fines-panel-header { -fx-padding: 18 20; }
+.result-count { -fx-font-size: 10px; -fx-text-fill: #8b95a7; }
+.fine-table-header { -fx-background-color: #f7f8fa; -fx-border-color: #e8ebf0 transparent #e8ebf0 transparent; -fx-padding: 10 18; }
+.column-label { -fx-font-size: 9px; -fx-font-weight: 800; -fx-text-fill: #7f899a; }
+.fine-row { -fx-padding: 13 18; -fx-border-color: transparent transparent #edf0f4 transparent; -fx-min-height: 65; }
+.fine-row:hover { -fx-background-color: #fafbfc; }
+.fine-row-last { -fx-border-color: transparent; }
+.fine-id { -fx-font-size: 10px; -fx-font-weight: 800; -fx-text-fill: #34445c; }
+.cell-text { -fx-font-size: 10px; -fx-text-fill: #586477; }
+.fine-amount { -fx-font-size: 11px; -fx-font-weight: 800; -fx-text-fill: #2d394d; }
+.status-unpaid, .status-paid, .status-waived { -fx-background-radius: 10; -fx-padding: 4 7; -fx-font-size: 9px; -fx-font-weight: 700; }
+.status-unpaid { -fx-background-color: #ffeded; -fx-text-fill: #c94c4c; }
+.status-paid { -fx-background-color: #e8f7ef; -fx-text-fill: #23875f; }
+.status-waived { -fx-background-color: #f0f1f4; -fx-text-fill: #747e90; }
+.row-primary, .row-action { -fx-background-radius: 6; -fx-border-radius: 6; -fx-padding: 6 9; -fx-font-size: 9px; -fx-font-weight: 700; -fx-cursor: hand; }
+.row-primary { -fx-background-color: #172033; -fx-text-fill: white; }
+.row-action { -fx-background-color: transparent; -fx-border-color: #dce1e8; -fx-text-fill: #47546a; }
+.row-action:hover { -fx-background-color: #edf3ff; -fx-border-color: #b8cceb; }
+.pagination { -fx-border-color: #edf0f4 transparent transparent transparent; -fx-padding: 12 18; }
+.page-button, .page-button-active { -fx-background-radius: 6; -fx-min-width: 29; -fx-min-height: 29; -fx-font-size: 10px; -fx-font-weight: 700; -fx-cursor: hand; }
+.page-button { -fx-background-color: transparent; -fx-border-color: #e0e4ea; -fx-border-radius: 6; -fx-text-fill: #657084; }
+.page-button-active { -fx-background-color: #172033; -fx-text-fill: white; }
