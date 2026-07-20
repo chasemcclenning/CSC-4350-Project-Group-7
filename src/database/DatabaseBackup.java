@@ -19,7 +19,8 @@ public final class DatabaseBackup {
             while(rs.next())tables.add(rs.getString("TABLE_NAME"));
         }
         try(BufferedWriter out=Files.newBufferedWriter(destination, StandardCharsets.UTF_8)){
-            out.write("-- Libris database backup\nSET FOREIGN_KEY_CHECKS=0;\n\n");
+            String database=connection.getCatalog().replace("`","``");
+            out.write("-- Libris database backup\nCREATE DATABASE IF NOT EXISTS `"+database+"`;\nUSE `"+database+"`;\nSET FOREIGN_KEY_CHECKS=0;\n\n");
             for(String table:tables){
                 try(Statement statement=connection.createStatement();ResultSet rs=statement.executeQuery("SHOW CREATE TABLE `"+table+"`")){
                     rs.next();out.write("DROP TABLE IF EXISTS `"+table+"`;\n");out.write(rs.getString(2));out.write(";\n\n");
@@ -46,7 +47,7 @@ public final class DatabaseBackup {
     private static void writeTriggers(Connection connection,BufferedWriter out)throws SQLException,IOException{
         try(Statement statement=connection.createStatement();ResultSet rs=statement.executeQuery("SHOW TRIGGERS")){
             while(rs.next()){
-                String name=rs.getString("Trigger"),timing=rs.getString("Timing"),event=rs.getString("Event"),table=rs.getString("Table"),body=rs.getString("Statement");
+                String name=rs.getString("Trigger"),timing=rs.getString("Timing"),event=rs.getString("Event"),table=rs.getString("Table"),body=rs.getString("Statement").replace("\r\n","\n").replace('\r','\n');
                 out.write("DROP TRIGGER IF EXISTS `"+name+"`;\nDELIMITER $$\nCREATE TRIGGER `"+name+"` "+timing+" "+event+" ON `"+table+"` FOR EACH ROW "+body+"$$\nDELIMITER ;\n\n");
             }
         }
