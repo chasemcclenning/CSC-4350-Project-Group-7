@@ -4,15 +4,25 @@ public class User {
     private String email;
     private String password;    // need to come up with a way to store these
     private String role;        // either "admin" or "member"
-    private double fines_owed;  // total of all outstanding fines for this user
+    private double finesOwed;  // total of all outstanding fines for this user
 
-    public User(String userID, String name, String email, String password, String role, double fines_owed) {
+    // constructor for creating a user for the first time, where fines owed is initialized to 0.0
+    public User(String userID, String name, String email, String password, String role) {
         this.userID = userID;
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.fines_owed = fines_owed;
+        this.finesOwed = 0.0; // Initialize fines owed to 0.0
+    }
+
+    public User(String userID, String name, String email, String password, String role, double finesOwed) {
+        this.userID = userID;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.finesOwed = finesOwed;
     }
 
     public boolean isAdmin() {
@@ -20,7 +30,7 @@ public class User {
     }
 
     public boolean canCheckout() {
-        return fines_owed <= 0;
+        return finesOwed <= 0;
     }
 
     public String getUserID() {
@@ -43,8 +53,8 @@ public class User {
         return role;
     }
 
-    public double getFines_owed() {
-        return fines_owed;
+    public double getFinesOwed() {
+        return finesOwed;
     }
 
     @Override
@@ -53,6 +63,6 @@ public class User {
                 "Name: " + name + "\n" +
                 "Email: " + email + "\n" +
                 "Role: " + role + "\n" +
-                "Fines Owed: $" + fines_owed;
+                "Fines Owed: $" + finesOwed;
     }
 }

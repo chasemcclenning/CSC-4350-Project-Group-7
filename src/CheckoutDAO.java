@@ -77,12 +77,12 @@ public class CheckoutDAO {
     }
 
     // delete a checkout
-    public void deleteCheckout(int checkoutId) throws SQLException {
+    public void deleteCheckout(String checkoutID) throws SQLException {
         Connection conn = DBConn.getInstance();
 
         String sql = "DELETE FROM checkout WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, checkoutId);
+            stmt.setString(1, checkoutID);
             stmt.executeUpdate();
         }
     }

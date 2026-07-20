@@ -14,7 +14,7 @@ public class UserDAO {
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
             stmt.setString(4, user.getRole());
-            stmt.setDouble(5, user.getFines_owed());
+            stmt.setDouble(5, user.getFinesOwed());
             stmt.executeUpdate();
         }
     }
@@ -29,14 +29,14 @@ public class UserDAO {
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                String userID = rs.getString("user_id");
+                String userID = rs.getString("id");
                 String name = rs.getString("name");
                 String email = rs.getString("email");
                 String password = rs.getString("password");
                 String role = rs.getString("role");
-                double fines_owed = rs.getDouble("fines_owed");
+                double finesOwed = rs.getDouble("fines_owed");
 
-                User user = new User(userID, name, email, password, role, fines_owed);
+                User user = new User(userID, name, email, password, role, finesOwed);
                 users.add(user);
             }
         }
@@ -47,13 +47,13 @@ public class UserDAO {
     public void updateUserDetails(User user) throws SQLException {
         Connection conn = DBConn.getInstance();
 
-        String sql = "UPDATE user SET name = ?, email = ?, password = ?, role = ?, fines_owed = ? WHERE user_id = ?";
+        String sql = "UPDATE user SET name = ?, email = ?, password = ?, role = ?, fines_owed = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
             stmt.setString(4, user.getRole());
-            stmt.setDouble(5, user.getFines_owed());
+            stmt.setDouble(5, user.getFinesOwed());
             stmt.setString(6, user.getUserID());
             stmt.executeUpdate();
         }
@@ -63,7 +63,7 @@ public class UserDAO {
     public void deleteUser(String userID) throws SQLException {
         Connection conn = DBConn.getInstance();
 
-        String sql = "DELETE FROM user WHERE user_id = ?";
+        String sql = "DELETE FROM user WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, userID);
             stmt.executeUpdate();
