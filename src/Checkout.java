@@ -1,15 +1,15 @@
 import java.util.Date;
 
 public class Checkout {
-    private int checkoutId;
-    private int memberID;
-    private int copyID;
+    private String checkoutID;
+    private String memberID;
+    private String copyID;
     private Date checkoutDate;
     private Date dueDate;
     private Date returnDate;
 
     // constrctor for a new checkout (checkoutID AND returnDate are unknown)
-    public Checkout(int memberID, int copyID, Date checkoutDate, Date dueDate) {
+    public Checkout(String memberID, String copyID, Date checkoutDate, Date dueDate) {
         this.memberID = memberID;
         this.copyID = copyID;
         this.checkoutDate = checkoutDate;
@@ -18,8 +18,8 @@ public class Checkout {
     }
 
     // full constructor (for read statements)
-    public Checkout(int checkoutId, int memberID, int copyID, Date checkoutDate, Date dueDate, Date returnDate) {
-        this.checkoutId = checkoutId;
+    public Checkout(String checkoutID, String memberID, String copyID, Date checkoutDate, Date dueDate, Date returnDate) {
+        this.checkoutID = checkoutID;
         this.memberID = memberID;
         this.copyID = copyID;
         this.checkoutDate = checkoutDate;
@@ -27,15 +27,15 @@ public class Checkout {
         this.returnDate = returnDate;
     }
 
-    public int getCheckoutId() {
-        return checkoutId;
+    public String getCheckoutId() {
+        return checkoutID;
     }
 
-    public int getMemberId() {
+    public String getMemberId() {
         return memberID;
     }
 
-    public int getCopyId() {
+    public String getCopyId() {
         return copyID;
     }
 
@@ -50,15 +50,10 @@ public class Checkout {
     public Date getReturnDate() {
         return returnDate;
     }
-/* will figure out this logic later
-    public void returnBook(Date returnDate) {
-        this.returnDate = returnDate;
-        book.returnBook();
-    }
-*/
+    
     @Override
     public String toString() {
-        return "Checkout ID: " + checkoutId +
+        return "Checkout ID: " + checkoutID +
                ", Member ID: " + memberID +
                ", Copy ID: " + copyID +
                ", Checkout Date: " + checkoutDate +
