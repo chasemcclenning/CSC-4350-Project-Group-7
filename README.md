@@ -5,11 +5,10 @@ Libris is a JavaFX desktop application backed by MySQL. It provides separate lib
 ## Requirements
 
 - Java Development Kit (JDK) 21
-- JavaFX SDK 21.0.11
 - MySQL Community Server 8
 - Git
 
-The MySQL Connector/J driver is already included at `src/mysql-connector-j-9.7.0.jar`. JavaFX is not committed to Git, so each developer must download it separately.
+Maven manages JavaFX and MySQL Connector/J automatically. The included Maven Wrapper lets developers build the project without installing Maven globally.
 
 ## 1. Clone the project
 
@@ -19,17 +18,7 @@ cd CSC-4350-Project-Group-7
 git switch ui-dev
 ```
 
-## 2. Install JavaFX
-
-Download JavaFX SDK 21.0.11 from [Gluon](https://gluonhq.com/products/javafx/) for your operating system.
-
-Extract it into the repository root so this path exists:
-
-```text
-javafx-sdk-21.0.11/lib
-```
-
-## 3. Create the MySQL database
+## 2. Create the MySQL database
 
 Start MySQL, then import the included database dump from the repository root:
 
@@ -45,7 +34,7 @@ If the `mysql` command is not on your PATH on macOS, use:
 /usr/local/mysql/bin/mysql -u root -p < dump-librarydb-202606271316.sql
 ```
 
-## 4. Configure database access
+## 3. Configure database access
 
 The first time the app cannot connect, it displays a one-time MySQL setup dialog. Enter:
 
@@ -71,40 +60,34 @@ export LIBRARY_DB_USER="root"
 export LIBRARY_DB_PASSWORD="your_mysql_password"
 ```
 
-## 5. Compile the application
+## 4. Build the application
 
 From the repository root on macOS or Linux:
 
 ```bash
-mkdir -p bin/app
-
-javac \
-  --module-path javafx-sdk-21.0.11/lib \
-  --add-modules javafx.controls,javafx.fxml \
-  -cp src/mysql-connector-j-9.7.0.jar \
-  -d bin/app \
-  src/App.java \
-  $(find src/database src/model src/session src/ui -name '*.java')
+./mvnw clean package
 ```
 
-The command intentionally compiles the JavaFX application packages and not the older console demonstration files in `src`.
+On Windows:
 
-## 6. Run the application
+```powershell
+mvnw.cmd clean package
+```
+
+The first build downloads Maven, JavaFX, MySQL Connector/J, and the required build plugins. Later builds reuse the local Maven cache. The Maven compiler configuration intentionally excludes the older console demonstration files in `src`.
+
+## 5. Run the application
 
 On macOS or Linux:
 
 ```bash
-java \
-  --module-path javafx-sdk-21.0.11/lib \
-  --add-modules javafx.controls,javafx.fxml \
-  -cp "bin/app:src:src/mysql-connector-j-9.7.0.jar" \
-  App
+./mvnw javafx:run
 ```
 
-On Windows, use semicolons in the classpath:
+On Windows:
 
 ```powershell
-java --module-path javafx-sdk-21.0.11/lib --add-modules javafx.controls,javafx.fxml -cp "bin/app;src;src/mysql-connector-j-9.7.0.jar" App
+mvnw.cmd javafx:run
 ```
 
 ## Sample accounts
@@ -144,13 +127,13 @@ To share live data, the team must host one MySQL database that every computer ca
 - Check `config/database.properties` or the three database environment variables.
 - Verify the credentials with `mysql -u root -p`.
 
-### JavaFX modules are missing
+### Maven cannot download dependencies
 
-Confirm that `javafx-sdk-21.0.11/lib` exists in the project root and contains files such as `javafx.controls.jar` and `javafx.fxml.jar`.
+Confirm that the computer has internet access for the first build and that JDK 21 is active with `java -version`. Delete `target` and retry `./mvnw clean package` if a previous build was interrupted.
 
 ### Main class cannot be found
 
-Run the compile command first, remain in the repository root, and keep `bin/app`, `src`, and the MySQL connector in the runtime classpath.
+Run `./mvnw clean package` first and remain in the repository root when using `./mvnw javafx:run`.
 
 ### A book cannot be deleted
 
