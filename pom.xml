@@ -13,7 +13,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>21</maven.compiler.release>
         <javafx.version>21.0.11</javafx.version>
-        <mysql.connector.version>9.7.0</mysql.connector.version>
+        <h2.version>2.3.232</h2.version>
+        <junit.version>5.11.4</junit.version>
     </properties>
 
     <dependencies>
@@ -28,19 +29,27 @@
             <version>${javafx.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>${mysql.connector.version}</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
+        <finalName>libris</finalName>
         <sourceDirectory>${project.basedir}/src</sourceDirectory>
         <resources>
             <resource>
                 <directory>${project.basedir}/src</directory>
                 <includes>
                     <include>css/**</include>
+                    <include>database/**/*.sql</include>
                     <include>ui/**/*.fxml</include>
                 </includes>
             </resource>
@@ -54,6 +63,7 @@
                     <release>${maven.compiler.release}</release>
                     <includes>
                         <include>App.java</include>
+                        <include>Launcher.java</include>
                         <include>database/**/*.java</include>
                         <include>model/**/*.java</include>
                         <include>session/**/*.java</include>
@@ -62,12 +72,35 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+            <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>App</mainClass>
+                    <mainClass>Launcher</mainClass>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.8.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-runtime-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <includeScope>runtime</includeScope>
+                            <outputDirectory>${project.build.directory}/dependency</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

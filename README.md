@@ -1,68 +1,70 @@
 # Libris Library Management System
 
-Libris is a JavaFX desktop application backed by MySQL. It provides separate librarian and member interfaces for catalog management, accounts, borrowing and returns, holds, fines, audit history, reports, settings, and database backups.
+Libris is a JavaFX desktop application for managing a library catalog, accounts, borrowing and returns, holds, fines, audit history, reports, settings, and database backups.
 
-## Requirements
+The app uses an embedded local database. Its initial books, accounts, checkouts, holds, and audit records are bundled with the application, so teammates do not need to install MySQL or configure database credentials.
 
-- Java Development Kit (JDK) 21
-- MySQL Community Server 8
+## Easiest way to run Libris
+
+Download the installer for your computer from the GitHub Actions artifacts:
+
+- `Libris-macOS` contains the macOS `.dmg` installer.
+- `Libris-Windows` contains the Windows `.exe` installer.
+
+Install and open Libris normally. The installer already contains Java, JavaFX, the database engine, and the project data.
+
+These academic installers are not signed with paid Apple or Microsoft developer certificates. If macOS displays an unidentified-developer warning, Control-click Libris, choose **Open**, and confirm **Open**. If Windows SmartScreen appears, choose **More info** and then **Run anyway** only after confirming the installer came from this project repository.
+
+On first launch, Libris creates a writable copy of the bundled library data in the current user's home folder:
+
+- macOS and Linux: `~/.libris/librarydb.mv.db`
+- Windows: `%USERPROFILE%\.libris\librarydb.mv.db`
+
+Changes made in the app remain available on that computer after Libris closes. Each installation has its own independent copy, so changes made by different teammates do not synchronize.
+
+## Sample accounts
+
+| Role | Name | Email | Password |
+|---|---|---|---|
+| Librarian | Librarian Sample | `librarian@example.com` | `libexample1` |
+| Member | Member Sample | `member@example.com` | `memexample1` |
+
+Librarians open the librarian portal. Members open the member portal. A librarian can create additional member or librarian accounts from the **Members** page by selecting the appropriate account type.
+
+## Run from source
+
+### Requirements
+
+- JDK 21
 - Git
 
-Maven manages JavaFX and MySQL Connector/J automatically. The included Maven Wrapper lets developers build the project without installing Maven globally.
+Maven does not need to be installed separately because the Maven Wrapper is included in the repository.
 
-## 1. Clone the project
+### Clone and run
+
+On macOS or Linux:
 
 ```bash
 git clone https://github.com/chasemcclenning/CSC-4350-Project-Group-7.git
 cd CSC-4350-Project-Group-7
 git switch ui-dev
+./mvnw javafx:run
 ```
 
-## 2. Create the MySQL database
+On Windows PowerShell:
 
-Start MySQL, then import the included database dump from the repository root:
-
-```bash
-mysql -u root -p < dump-librarydb-202606271316.sql
+```powershell
+git clone https://github.com/chasemcclenning/CSC-4350-Project-Group-7.git
+cd CSC-4350-Project-Group-7
+git switch ui-dev
+.\mvnw.cmd javafx:run
 ```
 
-Enter the password used with your local MySQL installation. The dump creates the `librarydb` database, tables, relationships, triggers, and initial records.
+The first source build requires internet access so Maven can download JavaFX, H2, and the build plugins. Later builds reuse the local Maven cache.
 
-If the `mysql` command is not on your PATH on macOS, use:
+## Build and test
 
-```bash
-/usr/local/mysql/bin/mysql -u root -p < dump-librarydb-202606271316.sql
-```
-
-## 3. Configure database access
-
-The first time the app cannot connect, it displays a one-time MySQL setup dialog. Enter:
-
-- URL: `jdbc:mysql://localhost:3306/librarydb`
-- Username: your local MySQL username, commonly `root`
-- Password: your local MySQL password
-
-The app saves these settings in `config/database.properties`. This file is ignored by Git, so the database password is not committed.
-
-You can also create it manually by copying `config/database.properties.example`:
-
-```properties
-url=jdbc:mysql://localhost:3306/librarydb
-user=root
-password=your_mysql_password
-```
-
-Environment variables can be used instead:
-
-```bash
-export LIBRARY_DB_URL="jdbc:mysql://localhost:3306/librarydb"
-export LIBRARY_DB_USER="root"
-export LIBRARY_DB_PASSWORD="your_mysql_password"
-```
-
-## 4. Build the application
-
-From the repository root on macOS or Linux:
+On macOS or Linux:
 
 ```bash
 ./mvnw clean package
@@ -71,74 +73,70 @@ From the repository root on macOS or Linux:
 On Windows:
 
 ```powershell
-mvnw.cmd clean package
+.\mvnw.cmd clean package
 ```
 
-The first build downloads Maven, JavaFX, MySQL Connector/J, and the required build plugins. Later builds reuse the local Maven cache. The Maven compiler configuration intentionally excludes the older console demonstration files in `src`.
+The integration tests create a temporary database, verify the bundled data and sample credentials, perform a checkout and return, and create a database backup.
 
-## 5. Run the application
+## Build native installers
 
-On macOS or Linux:
+Build the macOS `.dmg` on a Mac with JDK 21:
 
 ```bash
-./mvnw javafx:run
+./packaging/package-macos.sh
 ```
 
-On Windows:
+Build the Windows `.exe` from PowerShell on Windows with JDK 21 and WiX Toolset:
 
 ```powershell
-mvnw.cmd javafx:run
+.\packaging\package-windows.ps1
 ```
 
-## Sample accounts
+Installers are written to `target/installer`. Native installers must be built on their target operating system, so a Mac builds the `.dmg` and Windows builds the `.exe`.
 
-The included database dump creates these project accounts:
+The GitHub Actions workflow **Build native installers** builds both automatically. Open the repository's **Actions** tab, select that workflow, choose **Run workflow**, and download the `Libris-macOS` and `Libris-Windows` artifacts after both jobs finish.
 
-| Role | Name | Email | Password |
-|---|---|---|---|
-| Librarian | Librarian Sample | `librarian@example.com` | `libexample1` |
-| Member | Member Sample | `member@example.com` | `memexample1` |
+## Bundled data and resets
 
-Librarians open the librarian dashboard. Members open the member portal. New librarian and member accounts can be created from the librarian **Accounts** page by choosing the appropriate account type.
+`src/database/seed-h2.sql` is the snapshot bundled into every build. It represents the existing project data at the time the installer was created. The original MySQL dump remains in the repository as a historical/export reference; teammates do not need it to run Libris.
+
+To discard changes on one computer and restore the bundled snapshot:
+
+1. Close Libris.
+2. Delete `librarydb.mv.db` from the `.libris` folder in that user's home directory.
+3. Open Libris again.
+
+Libris will create a fresh local database from the bundled snapshot. This permanently removes the local changes on that computer, so create a backup first if the data is needed.
 
 ## Main workflows
 
-- **Books:** add or edit titles and the number of physical copies. Titles with borrowing history are protected from deletion so circulation records remain valid.
-- **Accounts:** create, view, edit, or delete member and librarian accounts.
-- **Borrow & Return:** check out an available title to a member and return books from the currently borrowed list.
-- **Holds and fines:** manage records stored in MySQL.
-- **Profiles:** open book and user profiles from dashboard search, dashboard activity, Books, or Accounts.
-- **Audit Log:** displays real application actions and the user responsible for them.
-- **Reports:** generates summaries from current database records and can export CSV files.
-- **Backup:** Settings → Backup → Back up now creates a `.sql` file containing tables, records, and triggers.
-
-## Database sharing
-
-By default, every developer has a separate local MySQL database. Git shares the application code and database dump, but it does not synchronize changes made inside each developer's local database.
-
-To share live data, the team must host one MySQL database that every computer can reach and configure `LIBRARY_DB_URL`, `LIBRARY_DB_USER`, and `LIBRARY_DB_PASSWORD` for that server.
+- **Books:** add or edit titles and physical-copy counts. Titles with borrowing history are protected from deletion so circulation records remain valid.
+- **Members:** create, view, edit, or remove member and librarian accounts.
+- **Borrow & Return:** check out an available title to a member and return books from the currently borrowed section.
+- **Holds and fines:** manage holds and fine records in the local database.
+- **Profiles:** open book and user profiles from dashboard search, activity, Books, or Members.
+- **Audit Log:** view application actions and the user responsible for each one.
+- **Reports:** generate summaries from current local records and export CSV files.
+- **Backup:** use **Settings → Backup → Back up now** to create an SQL backup of the local database.
 
 ## Troubleshooting
 
-### Cannot connect to the library database
+### The app does not open from source
 
-- Confirm that MySQL is running.
-- Confirm that `librarydb` exists with `SHOW DATABASES;`.
-- Check `config/database.properties` or the three database environment variables.
-- Verify the credentials with `mysql -u root -p`.
+Confirm that JDK 21 is active with `java -version`, run the command from the repository root, and try `./mvnw clean package` before `./mvnw javafx:run`.
 
 ### Maven cannot download dependencies
 
-Confirm that the computer has internet access for the first build and that JDK 21 is active with `java -version`. Delete `target` and retry `./mvnw clean package` if a previous build was interrupted.
+Confirm that the computer has internet access during the first build. If a build was interrupted, delete the `target` folder and run the build again.
 
-### Main class cannot be found
+### Local library data cannot be opened
 
-Run `./mvnw clean package` first and remain in the repository root when using `./mvnw javafx:run`.
+Close other copies of Libris that may be using the same local database. Confirm that the current user can write to the `.libris` folder in their home directory.
 
 ### A book cannot be deleted
 
-Books referenced by checkout history cannot be deleted because removing them would invalidate borrowing and audit records. Titles without checkout history can be deleted with their unreferenced copies.
+Books referenced by checkout history cannot be deleted because removing them would invalidate circulation and audit records. Titles without checkout history can be deleted with their unreferenced copies.
 
 ## Security note
 
-This is an academic project. Account passwords currently use the values stored in the project database. A production system should hash passwords and use restricted database accounts rather than a MySQL root account.
+This is an academic project. Account passwords currently use the values stored in the project database. A production system should hash passwords and protect local application data with operating-system permissions.

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import database.UserDAO;
-import database.DBConn;
 import database.DatabaseBackup;
 
 import javafx.event.ActionEvent;
@@ -78,20 +77,7 @@ public class NavigationController {
             showLoginError("The email or password is incorrect.");
             return;
         } catch (SQLException databaseError) {
-            if (configureDatabase()) {
-                try {
-                    Optional<User> authenticatedUser = new UserDAO().authenticate(email, password);
-                    if (authenticatedUser.isPresent()) {
-                        UserSession.signIn(authenticatedUser.get());
-                        if (authenticatedUser.get().isLibrarian()) showDashboard(event);
-                        else showMemberHome(event);
-                    } else showLoginError("The email or password is incorrect.");
-                } catch (SQLException retryError) {
-                    showLoginError("MySQL still cannot be reached. Recheck the database password.");
-                }
-            } else {
-                showLoginError("Cannot connect to MySQL. Database setup was cancelled.");
-            }
+            showLoginError("The local library data could not be opened. Contact support.");
             return;
         }
     }
@@ -153,37 +139,6 @@ public class NavigationController {
         VBox content = new VBox(8, new Label("Email this address for help accessing your account:"), supportEmail);
         alert.getDialogPane().setContent(content);
         alert.showAndWait();
-    }
-
-    private boolean configureDatabase() {
-        TextField url = new TextField("jdbc:mysql://localhost:3306/librarydb");
-        TextField user = new TextField("root");
-        PasswordField password = new PasswordField();
-        password.setPromptText("Your MySQL root password");
-        GridPane form = new GridPane();
-        form.setHgap(10); form.setVgap(10);
-        form.addRow(0, new Label("Database URL"), url);
-        form.addRow(1, new Label("MySQL user"), user);
-        form.addRow(2, new Label("MySQL password"), password);
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Connect to MySQL");
-        dialog.setHeaderText("One-time database setup");
-        dialog.getDialogPane().setContent(new VBox(10,
-                new Label("Enter the password you use with mysql -u root -p.\nThese settings stay on this computer and are ignored by Git."), form));
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.OK);
-        if (dialog.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) return false;
-        if (password.getText().isBlank()) {
-            new Alert(Alert.AlertType.WARNING, "Enter your MySQL password.").showAndWait();
-            return false;
-        }
-        try {
-            DBConn.saveLocalSettings(url.getText().trim(), user.getText().trim(), password.getText());
-            DBConn.getInstance();
-            return true;
-        } catch (Exception error) {
-            new Alert(Alert.AlertType.ERROR, "MySQL connection failed: " + error.getMessage()).showAndWait();
-            return false;
-        }
     }
 
     public void showDocumentation() {

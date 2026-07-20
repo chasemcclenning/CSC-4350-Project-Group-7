@@ -137,7 +137,7 @@ public class LibraryRepository {
     }
 
     public List<AuditRow> findAuditRows() throws SQLException {
-        String sql="SELECT a.id,a.user_id,u.name user_name,a.action,a.entity_type,a.entity_id,COALESCE(JSON_UNQUOTE(JSON_EXTRACT(a.notes,'$.message')),'') notes,a.created_at FROM audit_log a LEFT JOIN user u ON u.id=a.user_id ORDER BY a.created_at DESC";
+        String sql="SELECT a.id,a.user_id,u.name user_name,a.action,a.entity_type,a.entity_id,COALESCE(a.notes,'') notes,a.created_at FROM audit_log a LEFT JOIN user u ON u.id=a.user_id ORDER BY a.created_at DESC";
         try(PreparedStatement stmt=DBConn.getInstance().prepareStatement(sql);ResultSet rs=stmt.executeQuery()){List<AuditRow> rows=new ArrayList<>();while(rs.next())rows.add(new AuditRow(rs.getString("id"),rs.getString("user_id"),rs.getString("user_name"),rs.getString("action"),rs.getString("entity_type"),rs.getString("entity_id"),rs.getString("notes"),time(rs,"created_at")));return rows;}
     }
 
@@ -149,44 +149,114 @@ public class LibraryRepository {
     }
 
     public void checkout(String userId, String copyId, LocalDateTime dueAt) throws SQLException {
+        Connection connection = DBConn.getInstance();
+        boolean previousAutoCommit = connection.getAutoCommit();
         String checkoutId=nextId("checkout","co");
-        try (PreparedStatement stmt = DBConn.getInstance().prepareStatement(
-                "INSERT INTO checkout(id,user_id,copy_id,due_at) VALUES(?,?,?,?)")) {
-            stmt.setString(1,checkoutId); stmt.setString(2,userId); stmt.setString(3,copyId); stmt.setTimestamp(4,Timestamp.valueOf(dueAt)); stmt.executeUpdate();
+        try {
+            connection.setAutoCommit(false);
+            try (PreparedStatement copy = connection.prepareStatement(
+                    "UPDATE copy SET status='checked_out' WHERE id=? AND status='available'")) {
+                copy.setString(1,copyId);
+                if(copy.executeUpdate()!=1)throw new SQLException("That copy is no longer available.");
+            }
+            try (PreparedStatement stmt = connection.prepareStatement(
+                    "INSERT INTO checkout(id,user_id,copy_id,due_at) VALUES(?,?,?,?)")) {
+                stmt.setString(1,checkoutId); stmt.setString(2,userId); stmt.setString(3,copyId);
+                stmt.setTimestamp(4,Timestamp.valueOf(dueAt)); stmt.executeUpdate();
+            }
+            audit("CHECKOUT","checkout",checkoutId,"Book checked out to "+userName(userId));
+            connection.commit();
+        } catch (SQLException error) {
+            connection.rollback();
+            throw error;
+        } finally {
+            connection.setAutoCommit(previousAutoCommit);
         }
-        audit("CHECKOUT","checkout",checkoutId,"Book checked out to "+userName(userId));
     }
 
     public void returnCheckout(String checkoutId) throws SQLException {
-        repairCheckoutReturnTrigger();
-        update("UPDATE checkout SET returned_at=NOW() WHERE id=? AND returned_at IS NULL", checkoutId);
-        audit("RETURN","checkout",checkoutId,"Book returned");
-    }
-
-    private void repairCheckoutReturnTrigger() throws SQLException {
-        try (var statement=DBConn.getInstance().createStatement()) {
-            statement.execute("DROP TRIGGER IF EXISTS trg_checkout_returned");
-            statement.execute("""
-                    CREATE TRIGGER trg_checkout_returned AFTER UPDATE ON checkout FOR EACH ROW
-                    BEGIN
-                      IF OLD.returned_at IS NULL AND NEW.returned_at IS NOT NULL THEN
-                        UPDATE copy SET status='available' WHERE id=NEW.copy_id;
-                        UPDATE hold SET status='ready', expires_at=DATE_ADD(NOW(), INTERVAL 3 DAY)
-                        WHERE id=(SELECT id FROM (SELECT h.id FROM hold h
-                          JOIN copy c ON c.title_id=h.title_id
-                          WHERE c.id=NEW.copy_id AND h.status='waiting'
-                          ORDER BY h.queue_position LIMIT 1) AS next_hold);
-                      END IF;
-                    END
-                    """);
+        Connection connection=DBConn.getInstance();
+        boolean previousAutoCommit=connection.getAutoCommit();
+        try{
+            connection.setAutoCommit(false);
+            String copyId=null;
+            String titleId=null;
+            try(PreparedStatement stmt=connection.prepareStatement(
+                    "SELECT co.copy_id,c.title_id FROM checkout co JOIN copy c ON c.id=co.copy_id "
+                            + "WHERE co.id=? AND co.returned_at IS NULL")){
+                stmt.setString(1,checkoutId);
+                try(ResultSet rs=stmt.executeQuery()){
+                    if(rs.next()){copyId=rs.getString("copy_id");titleId=rs.getString("title_id");}
+                }
+            }
+            if(copyId==null)throw new SQLException("The selected checkout is not active.");
+            try(PreparedStatement stmt=connection.prepareStatement(
+                    "UPDATE checkout SET returned_at=CURRENT_TIMESTAMP WHERE id=?")){
+                stmt.setString(1,checkoutId);stmt.executeUpdate();
+            }
+            try(PreparedStatement stmt=connection.prepareStatement(
+                    "UPDATE copy SET status='available' WHERE id=?")){
+                stmt.setString(1,copyId);stmt.executeUpdate();
+            }
+            String holdId=null;
+            try(PreparedStatement stmt=connection.prepareStatement(
+                    "SELECT id FROM hold WHERE title_id=? AND status='waiting' "
+                            + "ORDER BY queue_position LIMIT 1")){
+                stmt.setString(1,titleId);
+                try(ResultSet rs=stmt.executeQuery()){if(rs.next())holdId=rs.getString(1);}
+            }
+            if(holdId!=null){
+                try(PreparedStatement stmt=connection.prepareStatement(
+                        "UPDATE hold SET status='ready',expires_at=? WHERE id=?")){
+                    stmt.setTimestamp(1,Timestamp.valueOf(LocalDateTime.now().plusDays(3)));
+                    stmt.setString(2,holdId);stmt.executeUpdate();
+                }
+            }
+            audit("RETURN","checkout",checkoutId,"Book returned");
+            connection.commit();
+        }catch(SQLException error){
+            connection.rollback();
+            throw error;
+        }finally{
+            connection.setAutoCommit(previousAutoCommit);
         }
     }
     public void cancelHold(String holdId) throws SQLException { update("UPDATE hold SET status='cancelled' WHERE id=?", holdId); audit("CANCEL","hold",holdId,"Hold cancelled"); }
     public void resolveFine(String fineId, String status) throws SQLException {
-        try (PreparedStatement stmt=DBConn.getInstance().prepareStatement("UPDATE fine SET status=? WHERE id=?")) {
-            stmt.setString(1,status); stmt.setString(2,fineId); stmt.executeUpdate();
+        Connection connection=DBConn.getInstance();
+        boolean previousAutoCommit=connection.getAutoCommit();
+        try{
+            connection.setAutoCommit(false);
+            String userId=null;
+            String currentStatus=null;
+            java.math.BigDecimal amount=null;
+            try(PreparedStatement stmt=connection.prepareStatement(
+                    "SELECT user_id,amount,status FROM fine WHERE id=?")){
+                stmt.setString(1,fineId);
+                try(ResultSet rs=stmt.executeQuery()){
+                    if(rs.next()){
+                        userId=rs.getString("user_id");amount=rs.getBigDecimal("amount");
+                        currentStatus=rs.getString("status");
+                    }
+                }
+            }
+            if(userId==null)throw new SQLException("The selected fine no longer exists.");
+            try(PreparedStatement stmt=connection.prepareStatement("UPDATE fine SET status=? WHERE id=?")){
+                stmt.setString(1,status);stmt.setString(2,fineId);stmt.executeUpdate();
+            }
+            if("outstanding".equals(currentStatus)&&("paid".equals(status)||"waived".equals(status))){
+                try(PreparedStatement stmt=connection.prepareStatement(
+                        "UPDATE user SET fines_owed=CASE WHEN fines_owed>? THEN fines_owed-? ELSE 0 END WHERE id=?")){
+                    stmt.setBigDecimal(1,amount);stmt.setBigDecimal(2,amount);stmt.setString(3,userId);stmt.executeUpdate();
+                }
+            }
+            audit(status.toUpperCase(),"fine",fineId,"Fine marked "+status);
+            connection.commit();
+        }catch(SQLException error){
+            connection.rollback();throw error;
+        }finally{
+            connection.setAutoCommit(previousAutoCommit);
         }
-        audit(status.toUpperCase(),"fine",fineId,"Fine marked "+status);
     }
 
     public void placeHold(String userId, String titleId) throws SQLException {
@@ -218,7 +288,7 @@ public class LibraryRepository {
     public void deleteUser(String id) throws SQLException { audit("DELETE","user",id,"Account deleted"); update("DELETE FROM user WHERE id=?", id); }
 
     public void createTitle(String name, String author, String genre, String isbn) throws SQLException {
-        execute("INSERT INTO title(name,author,genre,isbn) VALUES(?,?,?,?)", name, author, genre, isbn);
+        createTitle(name,author,genre,isbn,0);
     }
     public void createTitle(String name, String author, String genre, String isbn, int copyCount) throws SQLException {
         Connection connection = DBConn.getInstance();
@@ -257,7 +327,16 @@ public class LibraryRepository {
         if(desiredCount<unavailable)throw new SQLException("At least "+unavailable+" copies must remain because they are checked out, reserved, lost, or damaged.");
         if(desiredCount>total){insertCopies(connection,titleId,desiredCount-total);audit("UPDATE","title",titleId,"Copy count changed to "+desiredCount);return;}
         for(int i=0;i<total-desiredCount;i++){
-            try(PreparedStatement stmt=connection.prepareStatement("DELETE FROM copy WHERE title_id=? AND status='available' LIMIT 1")){stmt.setString(1,titleId);stmt.executeUpdate();}
+            String copyId=null;
+            try(PreparedStatement stmt=connection.prepareStatement(
+                    "SELECT id FROM copy WHERE title_id=? AND status='available' ORDER BY id LIMIT 1")){
+                stmt.setString(1,titleId);try(ResultSet rs=stmt.executeQuery()){if(rs.next())copyId=rs.getString(1);}
+            }
+            if(copyId!=null){
+                try(PreparedStatement stmt=connection.prepareStatement("DELETE FROM copy WHERE id=?")){
+                    stmt.setString(1,copyId);stmt.executeUpdate();
+                }
+            }
         }
         audit("UPDATE","title",titleId,"Copy count changed to "+desiredCount);
     }
@@ -291,7 +370,7 @@ public class LibraryRepository {
     private void audit(String action,String entityType,String entityId,String message) throws SQLException {
         String actor=UserSession.isSignedIn()?UserSession.getCurrentUser().getUserID():null;
         try(PreparedStatement stmt=DBConn.getInstance().prepareStatement(
-                "INSERT INTO audit_log(id,user_id,action,entity_type,entity_id,notes) VALUES(?,?,?,?,?,JSON_OBJECT('message',?))")){
+                "INSERT INTO audit_log(id,user_id,action,entity_type,entity_id,notes) VALUES(?,?,?,?,?,?)")){
             stmt.setString(1,nextId("audit_log","log"));stmt.setString(2,actor);stmt.setString(3,action);
             stmt.setString(4,entityType);stmt.setString(5,entityId);stmt.setString(6,message);stmt.executeUpdate();
         }
@@ -313,11 +392,18 @@ public class LibraryRepository {
         }
     }
     private String nextId(String table,String prefix)throws SQLException{
-        String sql="SELECT COALESCE(MAX(CAST(SUBSTRING(id,?) AS UNSIGNED)),0)+1 FROM `"+table+"` WHERE id REGEXP ?";
-        try(PreparedStatement stmt=DBConn.getInstance().prepareStatement(sql)){
-            stmt.setInt(1,prefix.length()+2);stmt.setString(2,"^"+prefix+"-[0-9]+$");
-            try(ResultSet rs=stmt.executeQuery()){rs.next();return String.format("%s-%03d",prefix,rs.getInt(1));}
+        int maximum=0;
+        String marker=prefix+"-";
+        try(PreparedStatement stmt=DBConn.getInstance().prepareStatement("SELECT id FROM `"+table+"`");
+            ResultSet rs=stmt.executeQuery()){
+            while(rs.next()){
+                String id=rs.getString(1);
+                if(id==null||!id.startsWith(marker))continue;
+                try{maximum=Math.max(maximum,Integer.parseInt(id.substring(marker.length())));}
+                catch(NumberFormatException ignored){}
+            }
         }
+        return String.format("%s-%03d",prefix,maximum+1);
     }
     private List<String> strings(String sql, String column) throws SQLException {
         try (PreparedStatement stmt=DBConn.getInstance().prepareStatement(sql); ResultSet rs=stmt.executeQuery()) {
