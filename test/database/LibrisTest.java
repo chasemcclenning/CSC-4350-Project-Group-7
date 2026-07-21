@@ -1,17 +1,19 @@
 package database;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import dao.UserDAO;
 import java.nio.file.Path;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
+import dao.UserDAO;
+import model.User;
 
 public class LibrisTest {
     @TempDir Path dataDirectory;
@@ -61,5 +63,19 @@ public class LibrisTest {
 
         assertEquals("No available copy remains for this title.", error.getMessage());
         assertEquals(activeCheckoutsBefore, repository.countActiveCheckouts());
+    }
+
+    @Test
+    void createAndVerifyUser() throws SQLException {
+        String email = "newuser@example.com";
+        String password = "newuserpassword";
+        String name = "Test User";
+
+        UserDAO userDAO = new UserDAO();
+        User user = new User(name, email, password, "patron", 0.0);
+
+        userDAO.createUser(user);
+
+        assertTrue(userDAO.authenticate(email, password).isPresent());
     }
 }

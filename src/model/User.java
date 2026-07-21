@@ -8,6 +8,16 @@ public class User {
     private final String role;
     private final double finesOwed;
 
+    // for creating a new user, when userID is not known yet
+    public User(String name, String email, String password, String role, double finesOwed) {
+        this.userID = null; // userID will be assigned by the database
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.finesOwed = finesOwed;
+    }
+
     public User(String userID, String name, String email, String password, String role, double finesOwed) {
         this.userID = userID;
         this.name = name;
