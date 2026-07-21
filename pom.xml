@@ -65,6 +65,7 @@
                         <include>App.java</include>
                         <include>Launcher.java</include>
                         <include>database/**/*.java</include>
+                        <include>dao/**/*.java</include>
                         <include>model/**/*.java</include>
                         <include>session/**/*.java</include>
                         <include>ui/**/*.java</include>
