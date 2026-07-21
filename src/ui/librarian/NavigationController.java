@@ -5,11 +5,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-import database.UserDAO;
+import dao.UserDAO;
 import database.DatabaseBackup;
-
-import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,12 +22,12 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import model.User;
-import session.UserSession;
 import session.ProfileSelection;
+import session.UserSession;
 
 public class NavigationController {
 
