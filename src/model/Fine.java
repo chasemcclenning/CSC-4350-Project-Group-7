@@ -1,3 +1,4 @@
+package model;
 public class Fine {
     private String fineID;
     private String checkoutID;

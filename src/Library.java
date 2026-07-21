@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import model.Checkout;
+
 // Library class manages books, members, and checkout records
 public class Library {
 

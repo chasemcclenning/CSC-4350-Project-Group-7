@@ -1,3 +1,4 @@
+package model;
 public class Copy {
     private String copyID;
     private String titleID;     // reference to the title this copy belongs to

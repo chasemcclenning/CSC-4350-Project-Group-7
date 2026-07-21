@@ -1,3 +1,4 @@
+package model;
 public class Title {
 	private String titleID;
 	private String name;
