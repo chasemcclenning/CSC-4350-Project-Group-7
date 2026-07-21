@@ -44,6 +44,7 @@
     <build>
         <finalName>libris</finalName>
         <sourceDirectory>${project.basedir}/src</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/test</testSourceDirectory>
         <resources>
             <resource>
                 <directory>${project.basedir}/src</directory>
